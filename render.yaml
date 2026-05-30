@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: lwex-exchange
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    autoDeploy: false
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000

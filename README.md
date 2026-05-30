@@ -18,4 +18,3 @@ View your app in AI Studio: https://ai.studio/apps/39033a08-c54d-485d-a11d-1c6e3
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
-# MariTech-Icn---
