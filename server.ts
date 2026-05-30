@@ -412,7 +412,7 @@ async function saveCashierLedger(ledger: CashierLedger) {
 
 async function startServer() {
   const app = express();
-  const PORT = Number(process.env.PORT) || 3000;
+  const PORT = 3000;
 
   // NOWPayments Config from environment
   const paymentSessions = new Map<string, { amount: number; coin: string }>();
