@@ -1246,294 +1246,311 @@ export default function App() {
         {/* ============================================== */}
         {/* 2.1 TOP HEADER & CONTROLS (Unified) */}
         {/* ============================================== */}
-        <header className={`h-16 ${isDark ? 'bg-slate-950/80 border-slate-900/60' : 'bg-white border-slate-200'} border-b flex items-center justify-between px-4 sm:px-6 shrink-0 z-30 sticky top-0 backdrop-blur-md`}>
-          {/* Left panel buttons for mobile responsive drawers */}
-          <div className="flex items-center space-x-3">
-            <button className="lg:hidden p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-900 cursor-pointer" onClick={() => setSidebarOpen(true)}>
-              <Menu className="w-5 h-5" />
-            </button>
+        <header className={`min-h-[4rem] h-auto ${isDark ? 'bg-slate-950/80 border-slate-900/60' : 'bg-white border-slate-200'} border-b flex flex-col md:flex-row md:items-center justify-between px-3 sm:px-6 py-2.5 md:py-0 shrink-0 z-30 sticky top-0 backdrop-blur-md w-full gap-2 md:gap-0`}>
+          {/* 1. Brand Logo + Menu Toggles + Asset Swapper (Responsive flow) */}
+          <div className="flex items-center justify-between md:justify-start w-full md:w-auto gap-3">
+            <div className="flex items-center space-x-2">
+              {/* Sidebar trigger */}
+              <button className="lg:hidden p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-900 cursor-pointer" onClick={() => setSidebarOpen(true)}>
+                <Menu className="w-5 h-5" />
+              </button>
 
-            {/* Desktop Collapse Toggle Button */}
-            <button 
-              onClick={() => setDesktopSidebarCollapsed(!desktopSidebarCollapsed)} 
-              className="hidden lg:flex p-1.5 text-slate-450 hover:text-white rounded-lg hover:bg-slate-900/60 border border-slate-800 transition-all cursor-pointer"
-              title={desktopSidebarCollapsed ? "Expand Sidebar Menu" : "Collapse Sidebar Menu"}
-            >
-              {desktopSidebarCollapsed ? <ChevronRight className="w-4 h-4 text-amber-500 animate-pulse" /> : <ChevronLeft className="w-4 h-4" />}
-            </button>
-            
-            {/* Quick asset swapper */}
-            <div className="hidden sm:flex items-center space-x-1 border border-slate-900 bg-slate-900/20 px-2.5 py-1.5 rounded-lg text-xs font-mono">
-              <span className="font-bold text-slate-200">{activeAsset.name}</span>
-              <span className="text-[10px] text-slate-500 uppercase">({activeAsset.symbol})</span>
+              {/* Desktop Collapse Toggle Button */}
+              <button 
+                onClick={() => setDesktopSidebarCollapsed(!desktopSidebarCollapsed)} 
+                className="hidden lg:flex p-1.5 text-slate-450 hover:text-white rounded-lg hover:bg-slate-900/60 border border-slate-800 transition-all cursor-pointer"
+                title={desktopSidebarCollapsed ? "Expand Sidebar Menu" : "Collapse Sidebar Menu"}
+              >
+                {desktopSidebarCollapsed ? <ChevronRight className="w-4 h-4 text-amber-500 animate-pulse" /> : <ChevronLeft className="w-4 h-4" />}
+              </button>
+              
+              {/* Brand label only visible on mobile info header to maintain orientation */}
+              <div className="md:hidden flex items-center space-x-1.5 select-none" onClick={() => handleSwitchView('trade')}>
+                <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-amber-500 to-yellow-400 text-slate-950 flex items-center justify-center font-black shrink-0">
+                  <Sparkles className="w-3.5 h-3.5 text-slate-950" />
+                </div>
+                <span className="text-xs font-black tracking-wider text-slate-200">LWEX</span>
+              </div>
+            </div>
+
+            {/* Quick asset swapper - Keep visible on small screens with compact styling */}
+            <div className="flex items-center space-x-1 border border-slate-900 bg-slate-900/20 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-mono shrink-0">
+              <span className="font-bold text-slate-200 text-[10px] md:text-xs truncate max-w-[85px] sm:max-w-[120px]">{activeAsset.name}</span>
+              <span className="text-[8px] md:text-[10px] text-slate-500 uppercase font-bold shrink-0">({activeAsset.symbol})</span>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
+          {/* 2. Controls & Actions Row */}
+          <div className="flex items-center justify-between md:justify-end w-full md:w-auto gap-1.5 sm:gap-3 lg:gap-4 md:border-none border-t pt-2 md:pt-0 border-slate-800/10">
             {/* Real vs Demo selector */}
-            <div className={`flex items-center p-0.5 rounded-lg ${isDark ? 'bg-slate-900 border border-slate-850' : 'bg-slate-100 border border-slate-200'}`}>
+            <div className={`flex items-center p-0.5 rounded-lg ${isDark ? 'bg-slate-950 border border-slate-900' : 'bg-slate-100 border border-slate-200'} shrink-0`}>
               <button 
                 onClick={() => handleSwitchAccount('demo')}
-                className={`px-3 py-1 text-[10px] font-black uppercase rounded-md tracking-wider transition-all cursor-pointer ${
+                className={`px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[10px] font-black uppercase rounded-md tracking-wider transition-all cursor-pointer ${
                   account.mode === 'demo'
-                    ? 'bg-amber-500 text-slate-950'
-                    : 'text-slate-400 hover:text-slate-350'
+                    ? 'bg-amber-500 text-slate-950 shadow-sm'
+                    : 'text-slate-400 hover:text-slate-350 font-semibold'
                 }`}
               >
-                Demo Wallet
+                <span className="xs:hidden">Demo</span>
+                <span className="hidden xs:inline">Demo Wallet</span>
               </button>
               <button 
                 onClick={() => handleSwitchAccount('real')}
-                className={`px-3 py-1 text-[10px] font-black uppercase rounded-md tracking-wider transition-all cursor-pointer ${
+                className={`px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[10px] font-black uppercase rounded-md tracking-wider transition-all cursor-pointer ${
                   account.mode === 'real'
                     ? 'bg-amber-500 text-slate-950 shadow-sm'
-                    : 'text-slate-400 hover:text-slate-350'
+                    : 'text-slate-400 hover:text-slate-350 font-semibold'
                 }`}
               >
-                Real Wallet
+                <span className="xs:hidden">Real</span>
+                <span className="hidden xs:inline">Real Wallet</span>
               </button>
             </div>
 
             {/* Quick Balance Readout Panel inside Header */}
-            <div className="flex flex-col text-right">
-              <span className="text-[8px] text-slate-400 font-extrabold uppercase font-mono tracking-wider">
+            <div className="flex flex-col text-right min-w-[55px] sm:min-w-0">
+              <span className="text-[7px] sm:text-[8px] text-slate-400 font-extrabold uppercase font-mono tracking-tight sm:tracking-wider leading-none">
                 {account.mode.toUpperCase()} WALLET
               </span>
-              <span className="font-mono text-xs md:text-sm font-extrabold text-[#f59e0b] shadow-amber-500/20">
-                ${formatBalance(account.balance)} <span className="text-[9px] text-slate-400">USDT</span>
+              <span className="font-mono text-[10px] sm:text-xs md:text-sm font-extrabold text-[#f59e0b] leading-tight block mt-0.5">
+                ${formatBalance(account.balance)} <span className="text-[8px] text-slate-450 font-normal">USDT</span>
               </span>
             </div>
 
-            {/* Sound Synthesizer toggle */}
-            <button 
-              onClick={() => { setSoundEnabled(!soundEnabled); triggerToast(soundEnabled ? 'Chime synth muted.' : 'Harmonic chime synth active.', true); }}
-              className={`p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors ${soundEnabled ? 'text-amber-500 bg-amber-500/5' : ''}`}
-              title="Toggle Web Audio indicators"
-            >
-              {soundEnabled ? <Volume2 className="w-4 h-4 text-emerald-500 animate-bounce" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
-            </button>
-
-             {/* Deposit Cashier Button in Header (before Language button) */}
-            <button 
-              onClick={() => handleOpenCashierWithTab('deposit')}
-              className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold px-3 py-1.5 rounded-lg text-[10px] md:text-xs uppercase tracking-wider transition-all flex items-center space-x-1 shadow-md shadow-emerald-500/10 cursor-pointer shrink-0"
-              title="Quick Deposit Cashier"
-            >
-              <ArrowUpRight className="w-3.5 h-3.5" />
-              <span>Deposit <span className="hidden xs:inline">CASHIER</span></span>
-            </button>
-
-            {/* Language global placeholder */}
-            <button className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 text-xs font-bold tracking-tight uppercase flex items-center space-x-1 hover:bg-slate-900">
-              <Globe className="w-4 h-4" />
-              <span className="hidden leading-none md:inline text-[10px]">EN</span>
-            </button>
-
-            {/* Notifications feed dropdown */}
-            <div className="relative">
+            <div className="flex items-center space-x-1 sm:space-x-1.5 md:space-x-3.5 shrink-0">
+              {/* Sound Synthesizer toggle */}
               <button 
-                onClick={() => {
-                  setIsNotificationsOpen(!isNotificationsOpen);
-                  setIsUserMenuOpen(false);
-                }}
-                className={`relative p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors cursor-pointer ${isNotificationsOpen ? 'text-amber-500 bg-amber-500/5' : ''}`}
-                title="View notification feed"
+                onClick={() => { setSoundEnabled(!soundEnabled); triggerToast(soundEnabled ? 'Chime synth muted.' : 'Harmonic chime synth active.', true); }}
+                className={`p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors cursor-pointer ${soundEnabled ? 'text-amber-500 bg-amber-500/5' : ''}`}
+                title="Toggle Web Audio indicators"
               >
-                <Bell className="w-4 h-4" />
-                {notifications.filter(n => !n.read).length > 0 && (
-                  <span className="absolute top-1 right-1 h-3 min-w-3 px-1 rounded-full bg-rose-600 text-[8px] font-sans font-black flex items-center justify-center text-white scale-90">
-                    {notifications.filter(n => !n.read).length}
-                  </span>
-                )}
+                {soundEnabled ? <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-500 animate-bounce" /> : <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400" />}
               </button>
 
-              {/* Dynamic notifications overlay */}
-              {isNotificationsOpen && (
-                <>
-                  <div className="fixed inset-0 z-40" onClick={() => setIsNotificationsOpen(false)} />
-                  <div className={`absolute right-0 mt-2.5 w-80 md:w-96 rounded-xl shadow-2xl border ${
-                    isDark ? 'bg-slate-950 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-900'
-                  } z-50 overflow-hidden divide-y ${isDark ? 'divide-slate-900' : 'divide-gray-100'} animate-fade-in`}>
-                    <div className="p-3 flex items-center justify-between bg-slate-900/10">
-                      <div className="flex items-center space-x-1.5">
-                        <span className="font-extrabold text-xs uppercase tracking-wide">Live Feed</span>
-                        <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-black ${
-                          isDark ? 'bg-amber-500/10 text-amber-400' : 'bg-amber-100 text-amber-700'
-                        }`}>
-                          {notifications.filter(n => !n.read).length} Unread
-                        </span>
+              {/* Deposit Cashier Button */}
+              <button 
+                onClick={() => handleOpenCashierWithTab('deposit')}
+                className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider transition-all flex items-center space-x-1 shadow-md shadow-emerald-500/10 cursor-pointer shrink-0"
+                title="Quick Deposit Cashier"
+              >
+                <ArrowUpRight className="w-3.5 h-3.5" />
+                <span>Dep<span className="hidden min-[375px]:inline">osit</span> <span className="hidden sm:inline">CASHIER</span></span>
+              </button>
+
+              {/* Language global placeholder */}
+              <button className="hidden xs:flex p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-slate-200 text-xs font-bold tracking-tight uppercase items-center space-x-1 hover:bg-slate-900 cursor-pointer">
+                <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden leading-none md:inline text-[10px]">EN</span>
+              </button>
+
+              {/* Notifications feed dropdown */}
+              <div className="relative">
+                <button 
+                  onClick={() => {
+                    setIsNotificationsOpen(!isNotificationsOpen);
+                    setIsUserMenuOpen(false);
+                  }}
+                  className={`relative p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors cursor-pointer ${isNotificationsOpen ? 'text-amber-500 bg-amber-500/5' : ''}`}
+                  title="View notification feed"
+                >
+                  <Bell className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  {notifications.filter(n => !n.read).length > 0 && (
+                    <span className="absolute top-0.5 right-0.5 h-2.5 min-w-[10px] px-0.5 rounded-full bg-rose-600 text-[7px] font-sans font-black flex items-center justify-center text-white scale-95 leading-none">
+                      {notifications.filter(n => !n.read).length}
+                    </span>
+                  )}
+                </button>
+
+                {/* Dynamic notifications overlay */}
+                {isNotificationsOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setIsNotificationsOpen(false)} />
+                    <div className={`absolute right-0 mt-2.5 w-72 sm:w-80 md:w-96 rounded-xl shadow-2xl border ${
+                      isDark ? 'bg-slate-950 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-900'
+                    } z-50 overflow-hidden divide-y ${isDark ? 'divide-slate-900' : 'divide-gray-100'} animate-fade-in`}>
+                      <div className="p-3 flex items-center justify-between bg-slate-900/10">
+                        <div className="flex items-center space-x-1.5">
+                          <span className="font-extrabold text-[10px] sm:text-xs uppercase tracking-wide">Live Feed</span>
+                          <span className={`text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-full font-black ${
+                            isDark ? 'bg-amber-500/10 text-amber-400' : 'bg-amber-100 text-amber-700'
+                          }`}>
+                            {notifications.filter(n => !n.read).length} Unread
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-2.5">
+                          {notifications.length > 0 && (
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+                                triggerToast("All notifications marked as read.", true);
+                              }}
+                              className="text-[9px] sm:text-[10px] text-amber-500 hover:text-amber-400 font-bold hover:underline cursor-pointer"
+                            >
+                              Read All
+                            </button>
+                          )}
+                          {notifications.length > 0 && (
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setNotifications([]);
+                                triggerToast("Notification feed cleared.", true);
+                              }}
+                              className="text-[9px] sm:text-[10px] text-rose-500 hover:text-rose-455 font-bold hover:underline cursor-pointer"
+                            >
+                              Clear
+                            </button>
+                          )}
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-2.5">
-                        {notifications.length > 0 && (
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-                              triggerToast("All notifications marked as read.", true);
-                            }}
-                            className="text-[10px] text-amber-500 hover:text-amber-400 font-bold hover:underline cursor-pointer"
-                          >
-                            Read All
-                          </button>
-                        )}
-                        {notifications.length > 0 && (
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setNotifications([]);
-                              triggerToast("Notification feed cleared.", true);
-                            }}
-                            className="text-[10px] text-rose-500 hover:text-rose-455 font-bold hover:underline cursor-pointer"
-                          >
-                            Clear
-                          </button>
+
+                      <div className="max-h-[250px] sm:max-h-[350px] overflow-y-auto divide-y divide-slate-900/40 scrollbar-thin">
+                        {notifications.length === 0 ? (
+                          <div className="p-6 sm:p-8 text-center text-slate-450 flex flex-col items-center justify-center space-y-2">
+                            <Bell className="w-5 h-5 sm:w-7 sm:h-7 text-slate-600 animate-bounce" />
+                            <p className="text-[11px] sm:text-xs font-semibold">Your notification tray is silent.</p>
+                            <p className="text-[9px] sm:text-[10px] text-slate-500">Live trading history updates appear here.</p>
+                          </div>
+                        ) : (
+                          notifications.map((notif) => (
+                            <div 
+                              key={notif.id}
+                              onClick={() => {
+                                setNotifications(prev => prev.map(n => n.id === notif.id ? { ...n, read: true } : n));
+                              }}
+                              className={`p-2.5 sm:p-3.5 transition-all text-left flex items-start gap-2.5 cursor-pointer ${
+                                notif.read 
+                                  ? 'opacity-65 hover:opacity-100 bg-slate-900/5' 
+                                  : isDark ? 'bg-amber-500/[0.03] hover:bg-amber-500/[0.06]' : 'bg-amber-500/[0.04] hover:bg-amber-500/[0.08]'
+                              }`}
+                            >
+                              <span className={`h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full mt-1.5 shrink-0 ${
+                                notif.read ? 'bg-slate-500' : 'bg-amber-500 ring-2 ring-amber-500/20'
+                              }`} />
+                              <div className="flex-1 min-w-0">
+                                <p className={`text-[11px] sm:text-xs ${notif.read ? 'text-slate-450 font-semibold' : 'text-slate-200 font-black'}`}>
+                                  {notif.text}
+                                </p>
+                                <span className="text-[7px] sm:text-[8px] font-mono text-slate-500 block mt-1">{notif.time}</span>
+                              </div>
+                            </div>
+                          ))
                         )}
                       </div>
                     </div>
+                  </>
+                )}
+              </div>
 
-                    <div className="max-h-[350px] overflow-y-auto divide-y divide-slate-900/40 scrollbar-thin">
-                      {notifications.length === 0 ? (
-                        <div className="p-8 text-center text-slate-450 flex flex-col items-center justify-center space-y-2">
-                          <Bell className="w-7 h-7 text-slate-600 animate-bounce" />
-                          <p className="text-xs font-semibold">Your notification tray is silent.</p>
-                          <p className="text-[10px] text-slate-500">Live trading history updates appear here.</p>
-                        </div>
-                      ) : (
-                        notifications.map((notif) => (
-                          <div 
-                            key={notif.id}
-                            onClick={() => {
-                              setNotifications(prev => prev.map(n => n.id === notif.id ? { ...n, read: true } : n));
-                            }}
-                            className={`p-3.5 transition-all text-left flex items-start gap-2.5 cursor-pointer ${
-                              notif.read 
-                                ? 'opacity-65 hover:opacity-100 bg-slate-900/5' 
-                                : isDark ? 'bg-amber-500/[0.03] hover:bg-amber-500/[0.06]' : 'bg-amber-500/[0.04] hover:bg-amber-500/[0.08]'
-                            }`}
-                          >
-                            <span className={`h-1.5 w-1.5 rounded-full mt-1.5 shrink-0 ${
-                              notif.read ? 'bg-slate-500' : 'bg-amber-500 ring-2 ring-amber-500/20'
-                            }`} />
-                            <div className="flex-1 min-w-0">
-                              <p className={`text-xs ${notif.read ? 'text-slate-450 font-semibold' : 'text-slate-200 font-black'}`}>
-                                {notif.text}
-                              </p>
-                              <span className="text-[8px] font-mono text-slate-500 block mt-1">{notif.time}</span>
+              {/* Separator */}
+              <div className={`hidden sm:block h-6 w-[1px] ${isDark ? 'bg-slate-900' : 'bg-slate-200'}`} />
+
+              {/* Complete User Module */}
+              <div className="relative">
+                {currentUser ? (
+                  <>
+                    <button 
+                      onClick={() => {
+                        setIsUserMenuOpen(!isUserMenuOpen);
+                        setIsNotificationsOpen(false);
+                      }}
+                      className={`flex items-center space-x-1 p-1 rounded-lg hover:bg-slate-900 transition-all cursor-pointer ${
+                        isUserMenuOpen ? 'bg-slate-900' : ''
+                      }`}
+                    >
+                      <img 
+                        src={currentUser?.avatarUrl || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80"} 
+                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-amber-500/30 shadow-md"
+                        alt="Avatar"
+                      />
+                      <ChevronDown className={`w-2.5 h-2.5 sm:w-3 sm:h-3 text-slate-500 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {isUserMenuOpen && (
+                      <>
+                        <div className="fixed inset-0 z-40" onClick={() => setIsUserMenuOpen(false)} />
+                        <div className={`absolute right-0 mt-2.5 w-48 sm:w-56 rounded-xl shadow-2xl border ${
+                          isDark ? 'bg-slate-950 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-900'
+                        } z-50 overflow-hidden divide-y ${isDark ? 'divide-slate-900' : 'divide-gray-100'} animate-fade-in`}>
+                          <div className="p-3 text-left">
+                            <p className="text-[11px] sm:text-xs font-black text-slate-200 truncate">{currentUser?.fullName}</p>
+                            <p className="text-[9px] sm:text-[10px] font-mono text-slate-450 truncate mt-0.5">{currentUser?.email}</p>
+                            <div className="flex items-center space-x-1 mt-2">
+                              <span className="text-[7px] sm:text-[8px] bg-amber-500/20 text-amber-455 px-1.5 py-0.5 rounded font-black uppercase">
+                                VIP 2 Account
+                              </span>
+                              <span className="text-[7px] sm:text-[8px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded font-black uppercase">
+                                Real Mode
+                              </span>
                             </div>
                           </div>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
 
-            {/* Separator */}
-            <div className={`h-8 w-[1px] ${isDark ? 'bg-slate-900' : 'bg-slate-200'}`} />
+                          <div className="p-1.5 space-y-0.5 text-left">
+                            <button 
+                              onClick={() => {
+                                setIsSettingsOpen(true);
+                                setIsUserMenuOpen(false);
+                              }}
+                              className={`flex items-center space-x-2.5 w-full p-2 rounded-lg text-[11px] sm:text-xs font-bold transition-all ${
+                                isDark ? 'text-slate-300 hover:bg-slate-900 hover:text-white' : 'text-slate-700 hover:bg-gray-100'
+                              }`}
+                            >
+                              <Settings className="w-3 w-3 sm:w-3.5 sm:h-3.5" />
+                              <span>Profile settings</span>
+                            </button>
+                            
+                            <button 
+                              onClick={() => {
+                                setIsGuideOpen(true);
+                                setIsUserMenuOpen(false);
+                              }}
+                              className={`flex items-center space-x-2.5 w-full p-2 rounded-lg text-[11px] sm:text-xs font-bold transition-all ${
+                                isDark ? 'text-slate-300 hover:bg-slate-900 hover:text-white' : 'text-slate-700 hover:bg-gray-100'
+                              }`}
+                            >
+                              <HelpCircle className="w-3 w-3 sm:w-3.5 sm:h-3.5" />
+                              <span>Interactive Guide</span>
+                            </button>
+                          </div>
 
-            {/* Complete User Module (Avatar drop down menu & Auth integration) */}
-            <div className="relative">
-              {currentUser ? (
-                <>
-                  <button 
-                    onClick={() => {
-                      setIsUserMenuOpen(!isUserMenuOpen);
-                      setIsNotificationsOpen(false);
-                    }}
-                    className={`flex items-center space-x-2 p-1 rounded-lg hover:bg-slate-900 transition-all cursor-pointer ${
-                      isUserMenuOpen ? 'bg-slate-900' : ''
-                    }`}
-                  >
-                    <img 
-                      src={currentUser?.avatarUrl || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80"} 
-                      className="w-7 h-7 rounded-full border border-amber-500/30 shadow-md"
-                      alt="Avatar"
-                    />
-                    <ChevronDown className={`w-3 h-3 text-slate-500 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  {isUserMenuOpen && (
-                    <>
-                      <div className="fixed inset-0 z-40" onClick={() => setIsUserMenuOpen(false)} />
-                      <div className={`absolute right-0 mt-2.5 w-56 rounded-xl shadow-2xl border ${
-                        isDark ? 'bg-slate-950 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-900'
-                      } z-50 overflow-hidden divide-y ${isDark ? 'divide-slate-900' : 'divide-gray-100'} animate-fade-in`}>
-                        <div className="p-3 text-left">
-                          <p className="text-xs font-black text-slate-200 truncate">{currentUser?.fullName}</p>
-                          <p className="text-[10px] font-mono text-slate-450 truncate mt-0.5">{currentUser?.email}</p>
-                          <div className="flex items-center space-x-1 mt-2">
-                            <span className="text-[8px] bg-amber-500/20 text-amber-450 px-1.5 py-0.5 rounded font-black uppercase">
-                              VIP 2 Account
-                            </span>
-                            <span className="text-[8px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded font-black uppercase">
-                              Real Mode
-                            </span>
+                          <div className="p-1.5 text-left">
+                            <button 
+                              onClick={() => {
+                                setCurrentUser(null);
+                                setIsUserMenuOpen(false);
+                                triggerToast("Successfully logged out from storage session.", true);
+                              }}
+                              className="flex items-center space-x-2.5 w-full p-2 rounded-lg text-[11px] sm:text-xs font-bold text-rose-500 hover:bg-rose-500/10 transition-all cursor-pointer"
+                            >
+                              <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rose-500" />
+                              <span>Log out of Session</span>
+                            </button>
                           </div>
                         </div>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <button 
+                    onClick={() => setIsAuthOpen(true)}
+                    className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-lg text-[10px] sm:text-xs uppercase tracking-wider transition-all shadow-md shadow-amber-500/15 cursor-pointer shrink-0"
+                  >
+                    Sign In
+                  </button>
+                )}
+              </div>
 
-                        <div className="p-1.5 space-y-0.5 text-left">
-                          <button 
-                            onClick={() => {
-                              setIsSettingsOpen(true);
-                              setIsUserMenuOpen(false);
-                            }}
-                            className={`flex items-center space-x-2.5 w-full p-2 rounded-lg text-xs font-bold transition-all ${
-                              isDark ? 'text-slate-300 hover:bg-slate-900 hover:text-white' : 'text-slate-700 hover:bg-gray-100'
-                            }`}
-                          >
-                            <Settings className="w-3.5 h-3.5" />
-                            <span>Profile settings</span>
-                          </button>
-                          
-                          <button 
-                            onClick={() => {
-                              setIsGuideOpen(true);
-                              setIsUserMenuOpen(false);
-                            }}
-                            className={`flex items-center space-x-2.5 w-full p-2 rounded-lg text-xs font-bold transition-all ${
-                              isDark ? 'text-slate-300 hover:bg-slate-900 hover:text-white' : 'text-slate-700 hover:bg-gray-100'
-                            }`}
-                          >
-                            <HelpCircle className="w-3.5 h-3.5" />
-                            <span>Interactive Guide</span>
-                          </button>
-                        </div>
-
-                        <div className="p-1.5 text-left">
-                          <button 
-                            onClick={() => {
-                              setCurrentUser(null);
-                              setIsUserMenuOpen(false);
-                              triggerToast("Successfully logged out from storage session.", true);
-                            }}
-                            className="flex items-center space-x-2.5 w-full p-2 rounded-lg text-xs font-bold text-rose-500 hover:bg-rose-500/10 transition-all cursor-pointer"
-                          >
-                            <X className="w-3.5 h-3.5 text-rose-500" />
-                            <span>Log out of Session</span>
-                          </button>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </>
-              ) : (
-                <button 
-                  onClick={() => setIsAuthOpen(true)}
-                  className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-4 py-1.5 rounded-lg text-xs uppercase tracking-wider transition-all shadow-md shadow-amber-500/15 cursor-pointer"
-                >
-                  Sign In
-                </button>
-              )}
+              {/* Theme toggle */}
+              <button 
+                onClick={handleToggleTheme}
+                className="p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 cursor-pointer"
+                title="Toggle Palette Color"
+              >
+                {isDark ? <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+              </button>
             </div>
-
-            <button 
-              onClick={handleToggleTheme}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900"
-              title="Toggle Palette Color"
-            >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
           </div>
         </header>
 

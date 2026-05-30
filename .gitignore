@@ -8,8 +8,8 @@ coverage/
 !.env.example
 
 # App-specific runtime generated files
-*.db
-*.sqlite
+*.db*
+*.sqlite*
 cashier-ledger.json
 uploads/
 server_log.txt
