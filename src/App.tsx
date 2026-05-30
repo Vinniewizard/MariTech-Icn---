@@ -119,41 +119,64 @@ export default function App() {
     }
   }, [theme]);
 
-  // Account states: Preloaded to match VIP 2 and balances featured in screenshot
+  // Account states: Logged out by default on first visit
   const [currentUser, setCurrentUser] = useState<any>(() => {
     const isLoggedOut = localStorage.getItem('lwex_logged_out') === 'true';
     if (isLoggedOut) return null;
     const saved = localStorage.getItem('lwex_current_user');
-    return saved ? JSON.parse(saved) : {
-      email: 'john.doe@lwex.com',
-      fullName: 'John Doe',
-      phone: '+1 555-0199',
-      country: 'United States',
-      balance: 25678.91,
-      accountType: 'real',
-      vipLevel: 'VIP 2',
-      avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100&q=80'
-    };
+    return saved ? JSON.parse(saved) : null;
   });
 
   const [account, setAccount] = useState<Account>(() => {
     const saved = localStorage.getItem('lwex_account');
     if (saved) {
-      const parsed = JSON.parse(saved);
-      // Ensure real standard balance mode
-      return { ...parsed, mode: 'real', balance: 25678.91 };
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error('Failed to parse account from storage', e);
+      }
     }
     return {
-      mode: 'real',
-      balance: 25678.91,
+      mode: 'demo',
+      balance: 10000.00,
       currency: 'USD',
-      id: 'm-ac-john-doe-vip2'
+      id: 'demo-temp-acc'
     };
   });
 
   const [realAccountBalance, setRealAccountBalance] = useState<number>(() => {
-    return Number(localStorage.getItem('lwex_real_balance')) || 25678.91;
+    const saved = localStorage.getItem('lwex_real_balance');
+    return saved !== null ? Number(saved) : 0.00;
   });
+
+  // Keep track of asset selector state
+  const [assetDropdownOpen, setAssetDropdownOpen] = useState(false);
+
+  // Sync account and balance when currentUser changes (Login/Logout event)
+  useEffect(() => {
+    if (currentUser) {
+      const userBalance = Number(currentUser.balance) ?? 0.00;
+      const isDemo = currentUser.accountType === 'demo';
+      setAccount(prev => ({
+        ...prev,
+        mode: isDemo ? 'demo' : 'real',
+        balance: userBalance,
+        id: `m-ac-${currentUser.id}`
+      }));
+      if (!isDemo) {
+        setRealAccountBalance(userBalance);
+      }
+    } else {
+      // Logged out: fallback to demo mode with demo wallet balance
+      setAccount(prev => ({
+        ...prev,
+        mode: 'demo',
+        balance: 10000.00,
+        id: 'demo-temp-acc'
+      }));
+      setRealAccountBalance(0.00);
+    }
+  }, [currentUser]);
 
   // Layout states
   const [activeTabView, setActiveTabView] = useState<'trade' | 'history' | 'stats'>('trade');
@@ -1273,10 +1296,59 @@ export default function App() {
               </div>
             </div>
 
-            {/* Quick asset swapper - Keep visible on small screens with compact styling */}
-            <div className="flex items-center space-x-1 border border-slate-900 bg-slate-900/20 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-mono shrink-0">
-              <span className="font-bold text-slate-200 text-[10px] md:text-xs truncate max-w-[85px] sm:max-w-[120px]">{activeAsset.name}</span>
-              <span className="text-[8px] md:text-[10px] text-slate-500 uppercase font-bold shrink-0">({activeAsset.symbol})</span>
+            {/* Interactive Quick asset swapper dropdown selection */}
+            <div className="relative">
+              <button 
+                id="header-asset-select-button"
+                onClick={() => setAssetDropdownOpen(!assetDropdownOpen)}
+                className="flex items-center space-x-1.5 sm:space-x-2 border border-slate-800 bg-slate-900/40 hover:bg-slate-900/100 transition-all px-2 md:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-mono shrink-0 cursor-pointer text-slate-200 focus:outline-none"
+              >
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-slate-200 text-[10px] md:text-xs truncate max-w-[80px] xs:max-w-[100px] sm:max-w-[120px]">{activeAsset.name}</span>
+                  <span className="text-[8px] md:text-[9.5px] text-slate-500 uppercase font-black tracking-tight">({activeAsset.symbol}/USD)</span>
+                </div>
+                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-all duration-200 shrink-0 ${assetDropdownOpen ? 'rotate-180 text-amber-400' : ''}`} />
+              </button>
+
+              {/* Asset Dropdown Overlay */}
+              {assetDropdownOpen && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setAssetDropdownOpen(false)} />
+                  <div className="absolute left-0 mt-2 w-64 rounded-xl border border-slate-800 bg-slate-950/95 shadow-2xl z-50 p-2 max-h-96 overflow-y-auto animate-fade-in divide-y divide-slate-900 scrollbar-thin">
+                    <div className="text-[8px] font-black tracking-widest text-slate-500 uppercase pb-1.5 pt-0.5 px-2">CHOOSE TRADING INSTRUMENT</div>
+                    <div className="py-1 space-y-0.5">
+                      {assetsRegistry.map((asset) => {
+                        const selected = asset.id === activeAsset.id;
+                        return (
+                          <button
+                            key={asset.id}
+                            onClick={() => {
+                              setActiveAsset(asset);
+                              setAssetDropdownOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between text-left p-2 rounded-lg transition-colors cursor-pointer ${
+                              selected 
+                                ? 'bg-amber-500/15 text-amber-400 font-bold border border-amber-500/30' 
+                                : 'text-slate-300 hover:bg-slate-900/80 hover:text-white border border-transparent'
+                            }`}
+                          >
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-[11px] font-black truncate">{asset.name}</span>
+                              <span className="text-[9px] text-slate-500 font-bold uppercase">{asset.symbol}/USDT</span>
+                            </div>
+                            <div className="text-right font-mono text-[10px] shrink-0">
+                              <div className="font-extrabold text-slate-200">${asset.price.toFixed(asset.decimals)}</div>
+                              <div className={`text-[9px] font-black ${asset.change >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                                {asset.change >= 0 ? '+' : ''}{asset.change.toFixed(2)}%
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -1595,8 +1667,14 @@ export default function App() {
             {/* Bitcoin Asset Large Info Block */}
             <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-950/40 border-slate-900' : 'bg-white border-slate-200'} flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shrink-0`}>
               <div className="flex items-center space-x-3.5">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center font-bold text-amber-500 shadow-inner">
-                  ₿
+                <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center font-bold text-amber-500 shadow-inner text-lg shrink-0">
+                  {activeAsset.symbol.includes('BTC') || activeAsset.id.includes('BTC') || activeAsset.symbol === 'C-NEPT' ? '₿' : 
+                   activeAsset.symbol === 'TFLUX' ? '🌊' :
+                   activeAsset.symbol === 'TITAN' ? '🛡️' :
+                   activeAsset.symbol === 'MFLOW' ? '⚡' :
+                   activeAsset.symbol === 'WIZARD' ? '👁️' :
+                   activeAsset.symbol === 'S-ANCHOR' ? '⚓' :
+                   activeAsset.symbol === 'M-LINK' ? '🇪🇺' : '📊'}
                 </div>
                 <div>
                   <div className="flex items-center space-x-2">
@@ -1627,6 +1705,45 @@ export default function App() {
                 <div>
                   <span className="block text-[9px] text-slate-450 uppercase font-black tracking-wider">Drift bias</span>
                   <span className="text-xs font-bold text-amber-400 font-mono">{(activeAsset.trendBias >= 0 ? '+' : '') + activeAsset.trendBias.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Trading Asset Selector Toggles Bar (TIDAL FLUX, TITAN, and others) */}
+            <div className={`p-2 rounded-xl border ${isDark ? 'bg-slate-950/40 border-slate-900/60' : 'bg-slate-50 border-slate-200'} flex items-center justify-between overflow-x-auto whitespace-nowrap gap-2 shrink-0 scrollbar-none`}>
+              <div className="flex items-center space-x-2 w-full">
+                <span className="text-[10px] uppercase font-black text-slate-500 tracking-wider mr-2 hidden md:inline-block">Popular Trade Parts:</span>
+                <div className="flex items-center space-x-1.5 overflow-x-auto w-full scrollbar-none py-0.5">
+                  {[
+                    { id: 'R_25', label: '🌊 Tidal Flux', symbol: 'TFLUX' },
+                    { id: 'R_50', label: '🛡️ Titan Swell', symbol: 'TITAN' },
+                    { id: 'R_10', label: '⚡ LWEX Flow', symbol: 'MFLOW' },
+                    { id: 'R_100', label: '👁️ Wizard Eye', symbol: 'WIZARD' },
+                    { id: 'CRY_BTCUSD', label: '₿ Crypto Neptune', symbol: 'C-NEPT' },
+                    { id: 'FRX_EURUSD', label: '🇪🇺 Meridian Link', symbol: 'M-LINK' }
+                  ].map((preset) => {
+                    const realAsset = assetsRegistry.find(a => a.id === preset.id || a.symbol === preset.symbol);
+                    if (!realAsset) return null;
+                    const isSelected = activeAsset.id === realAsset.id;
+                    return (
+                      <button
+                        key={realAsset.id}
+                        onClick={() => setActiveAsset(realAsset)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 border cursor-pointer inline-flex items-center space-x-2 shrink-0 ${
+                          isSelected 
+                            ? 'bg-amber-500 text-slate-950 font-black border-amber-600 shadow-md shadow-amber-500/10 scale-102' 
+                            : isDark 
+                              ? 'bg-slate-900/40 text-slate-350 border-slate-900/70 hover:bg-slate-900 hover:text-white'
+                              : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        <span className="font-extrabold">{preset.label}</span>
+                        <span className={`text-[10px] font-bold ${isSelected ? 'text-slate-900/80' : 'text-slate-500'}`}>
+                          ({realAsset.symbol})
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
