@@ -74,9 +74,14 @@ export default function WizardBot({
   triggerToast
 }: CopilotProps) {
   // Navigation tabs:
-  const [botTab, setBotTab] = useState<'signals' | 'telegram' | 'onboard' | 'qa'>('signals');
+  const [botTab, setBotTab] = useState<'signals' | 'telegram' | 'onboard' | 'qa' | 'ads' | 'notifs'>('signals');
   // Telegram Sub tabs:
   const [tgSubTab, setTgSubTab] = useState<'simulator' | 'api_settings' | 'members'>('simulator');
+  
+  const isAdmin = currentUser?.email?.toLowerCase().includes('admin') || 
+                  currentUser?.email?.toLowerCase().includes('peterchristine') || 
+                  currentUser?.email?.toLowerCase().includes('lucasantiago');
+
 
   const [messages, setMessages] = useState<CopilotMessage[]>([
     {
@@ -479,10 +484,10 @@ export default function WizardBot({
       </div>
 
       {/* TOP NAVIGATION TABS */}
-      <div className="flex border-b border-gray-150 dark:border-zinc-850 bg-slate-50 dark:bg-zinc-900 text-xs font-bold uppercase tracking-wider select-none">
+      <div className="flex overflow-x-auto whitespace-nowrap border-b border-gray-150 dark:border-zinc-850 bg-slate-50 dark:bg-zinc-900 text-xs font-bold uppercase tracking-wider select-none scrollbar-hide">
         <button 
           onClick={() => setBotTab('signals')}
-          className={`flex-1 py-2.5 text-center border-b-2 transition-all ${
+          className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all shrink-0 ${
             botTab === 'signals' 
               ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
               : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
@@ -490,30 +495,60 @@ export default function WizardBot({
         >
           🔮 Signals
         </button>
-        <button 
-          onClick={() => setBotTab('telegram')}
-          className={`flex-1 py-2.5 text-center border-b-2 transition-all flex items-center justify-center space-x-1 ${
-            botTab === 'telegram' 
-              ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
-              : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-          }`}
-        >
-          <TelegramIcon className="w-3 h-3 text-sky-500 fill-sky-500 animate-pulse" />
-          <span>Telegram Core</span>
-        </button>
-        <button 
-          onClick={() => setBotTab('onboard')}
-          className={`flex-1 py-2.5 text-center border-b-2 transition-all ${
-            botTab === 'onboard' 
-              ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
-              : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-          }`}
-        >
-          ⚙️ Onboard
-        </button>
+        {isAdmin && (
+          <button 
+            onClick={() => setBotTab('telegram')}
+            className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all flex items-center justify-center space-x-1 shrink-0 ${
+              botTab === 'telegram' 
+                ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
+                : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+            }`}
+          >
+            <TelegramIcon className="w-3 h-3 text-sky-500 fill-sky-500 animate-pulse" />
+            <span>Tg Core</span>
+          </button>
+        )}
+        {isAdmin && (
+          <button 
+            onClick={() => setBotTab('ads')}
+            className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all flex items-center justify-center space-x-1 shrink-0 ${
+              botTab === 'ads' 
+                ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
+                : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+            }`}
+          >
+            <Zap className="w-3 h-3 text-amber-500" />
+            <span>Ads</span>
+          </button>
+        )}
+        {isAdmin && (
+          <button 
+            onClick={() => setBotTab('notifs')}
+            className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all flex items-center justify-center space-x-1 shrink-0 ${
+              botTab === 'notifs' 
+                ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
+                : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+            }`}
+          >
+            <Bell className="w-3 h-3 text-rose-500" />
+            <span>Notifications</span>
+          </button>
+        )}
+        {!isAdmin && (
+          <button 
+            onClick={() => setBotTab('onboard')}
+            className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all shrink-0 ${
+              botTab === 'onboard' 
+                ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
+                : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+            }`}
+          >
+            ⚙️ Onboard
+          </button>
+        )}
         <button 
           onClick={() => setBotTab('qa')}
-          className={`flex-1 py-2.5 text-center border-b-2 transition-all flex items-center justify-center space-x-1 ${
+          className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all flex items-center justify-center space-x-1 shrink-0 ${
             botTab === 'qa' 
               ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
               : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
@@ -578,14 +613,16 @@ export default function WizardBot({
                       <span className="text-indigo-500 font-extrabold">{activeSignal.levelOfConfidence}</span>
                     </div>
                   </div>
-
-                  <button 
-                    onClick={handleBroadcastActiveSignal}
-                    className="w-full mt-2 bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/20 rounded py-1.5 text-[9px] font-bold uppercase flex items-center justify-center space-x-1.5 transition-all"
-                  >
-                    <TelegramIcon className="w-2.5 h-2.5 fill-current" />
-                    <span>Broadcast Signal on Telegram</span>
-                  </button>
+                  
+                  {isAdmin && (
+                    <button 
+                      onClick={handleBroadcastActiveSignal}
+                      className="w-full mt-2 bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/20 rounded py-1.5 text-[9px] font-bold uppercase flex items-center justify-center space-x-1.5 transition-all"
+                    >
+                      <TelegramIcon className="w-2.5 h-2.5 fill-current" />
+                      <span>Broadcast Signal on Telegram</span>
+                    </button>
+                  )}
                 </div>
               ) : (
                 <div className="text-center py-4 rounded bg-slate-50 dark:bg-zinc-900/60 border border-gray-150 dark:border-zinc-800">
@@ -675,7 +712,7 @@ export default function WizardBot({
         )}
 
         {/* ============ TAB: TELEGRAM PORTAL CORE ============ */}
-        {botTab === 'telegram' && (
+        {botTab === 'telegram' && isAdmin && (
           <div className="flex flex-col flex-1 select-none">
             {/* SUB TAB SELECTOR HEADERS */}
             <div className="flex border-b border-gray-150 dark:border-zinc-850 bg-slate-100 dark:bg-zinc-900/60 font-semibold text-[10px] tracking-tight text-slate-500 select-none">
@@ -1087,6 +1124,34 @@ export default function WizardBot({
                 </div>
               )}
             </div>
+          </div>
+        )}
+        
+        {/* ============ TAB: ADS ============ */}
+        {botTab === 'ads' && isAdmin && (
+          <div className="flex flex-col flex-1 p-4 text-center items-center justify-center space-y-4">
+            <Zap className="h-12 w-12 text-amber-500 block mb-2 opacity-50" />
+            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-widest">Advertisements Manager</h3>
+            <p className="text-[10px] text-slate-500">
+              Only authorized admins can configure global banners or promotional popups across the platform.
+            </p>
+            <button className="px-6 py-2 rounded bg-amber-500 text-slate-900 font-extrabold text-[10px] uppercase">
+              Launch Ad Campaign
+            </button>
+          </div>
+        )}
+
+        {/* ============ TAB: NOTIFICATIONS ============ */}
+        {botTab === 'notifs' && isAdmin && (
+          <div className="flex flex-col flex-1 p-4 text-center items-center justify-center space-y-4">
+            <Bell className="h-12 w-12 text-rose-500 block mb-2 opacity-50" />
+            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-widest">Global Notifications</h3>
+            <p className="text-[10px] text-slate-500">
+              Deploy emergency alerts, maintenance windows, or platform-wide push notifications to all users instantly.
+            </p>
+            <button className="px-6 py-2 rounded bg-rose-500 text-white font-extrabold text-[10px] uppercase">
+              Draft System Alert
+            </button>
           </div>
         )}
 

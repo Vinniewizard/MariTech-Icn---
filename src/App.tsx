@@ -1749,52 +1749,53 @@ export default function App() {
             </div>
 
             {/* TradingView styled interactive Area with floating tools */}
-            <div className={`rounded-xl border ${isDark ? 'bg-slate-950/20 border-slate-900' : 'bg-white border-slate-200'} p-3.5 flex flex-row gap-3 min-h-[460px] relative overflow-hidden`}>
+            <div className={`rounded-xl border ${isDark ? 'bg-slate-950/20 border-slate-900' : 'bg-white border-slate-200'} p-3 flex flex-col gap-2 min-h-[460px] relative overflow-hidden`}>
               
-              {/* Vertical drawing toolbar on Left of chart (featured in pro TV systems) */}
-              <div className="w-10 flex flex-col items-center py-2 space-y-2 border-r border-slate-900 shrink-0 select-none">
+              {/* Horizontal drawing toolbar on Top of chart */}
+              <div className="w-full flex items-center justify-start px-2 py-1 space-x-2 border-b border-slate-900 shrink-0 select-none">
                 <button 
                   onClick={() => triggerToast("TV crosshair cursor highlighted.", true)}
-                  className="p-1.5 rounded-md hover:bg-slate-900 hover:text-white text-slate-500 hover:scale-105 active:scale-95 transition-transform" 
+                  className="p-1 rounded-md hover:bg-slate-900 hover:text-white text-slate-500 hover:scale-105 active:scale-95 transition-transform" 
                   title="Crosshair pointer"
                 >
-                  <Search className="w-4 h-4" />
+                  <Search className="w-3.5 h-3.5" />
                 </button>
                 <button 
                   onClick={() => triggerToast("Trendline drawing anchor mode ready. Drag click anchors on chart canvas.", true)}
-                  className="p-1.5 rounded-md hover:bg-slate-900 text-slate-400 hover:text-amber-400 hover:scale-105 transition-all" 
+                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-amber-400 hover:scale-105 transition-all" 
                   title="Draw Trendline"
                 >
-                  <TrendingUp className="w-4 h-4" />
+                  <TrendingUp className="w-3.5 h-3.5" />
                 </button>
                 <button 
                   onClick={() => triggerToast("Brushes and pencil drawing tools active.", true)}
-                  className="p-1.5 rounded-md hover:bg-slate-900 text-slate-400 hover:text-purple-400 transition-all" 
+                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-purple-400 transition-all" 
                   title="Brush drawing board"
                 >
-                  <Bot className="w-4 h-4" />
+                  <Bot className="w-3.5 h-3.5" />
                 </button>
-                <div className="w-5 h-[1px] bg-slate-900 my-1" />
+                <div className="h-4 w-[1px] bg-slate-800 mx-1" />
                 <button 
                   onClick={() => triggerToast("Fibers Fibonacci Retracement bands overlay activated.", true)}
-                  className="p-1.5 rounded-md hover:bg-slate-900 text-slate-400 hover:text-amber-400 transition-all" 
+                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-amber-400 transition-all" 
                   title="Fibonacci Retracements"
                 >
-                  <Award className="w-4 h-4" />
+                  <Award className="w-3.5 h-3.5" />
                 </button>
                 <button 
                   onClick={() => triggerToast("Measuring grid tools highlighted. Click chart coordinates.", true)}
-                  className="p-1.5 rounded-md hover:bg-slate-900 text-slate-400 hover:text-blue-400 transition-all" 
+                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-blue-400 transition-all" 
                   title="Distance Measure Scale"
                 >
-                  <Activity className="w-4 h-4 font-bold" />
+                  <Activity className="w-3.5 h-3.5 font-bold" />
                 </button>
+                <div className="flex-1"></div>
                 <button 
                   onClick={() => triggerToast("Reset drawings and clear canvas annotations.", true)}
-                  className="p-1.5 rounded-md hover:bg-slate-900 text-slate-400 hover:text-rose-500 transition-colors" 
+                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-rose-500 transition-colors" 
                   title="Garbage Reset All Drawings"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5" />
                 </button>
               </div>
 
