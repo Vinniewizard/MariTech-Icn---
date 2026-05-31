@@ -1,0 +1,1091 @@
+
+> react-example@0.0.0 dev
+> ESBUILD_NO_THREADS=1 tsx server.ts
+
+◇ injected env (1) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+Gemini system loaded.
+Starting Vite server...
+Vite middleware mounted for local dev server.
+Server running at http://localhost:3000
+8:37:59 PM [vite] (client) Pre-transform error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+8:37:59 PM [vite] (client) Pre-transform error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+8:38:00 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1358:22)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3192:16)
+      at TypeScriptParserMixin.parseExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:17)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:688:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementLike (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseProgram (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/parser/index.ts:29:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/normalize-file.ts:50:24)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/index.ts:41:36)
+      at run.next (<anonymous>)
+      at transform (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:261:32)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:189:28
+      at <anonymous> (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:113:33
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:287:14)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+8:38:00 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.jsxParseIdentifier (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:278:14)
+      at TypeScriptParserMixin.jsxParseNamespacedName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:288:25)
+      at TypeScriptParserMixin.jsxParseElementName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:306:14)
+      at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:429:24)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:470:35)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElement (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at fn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3745:23)
+      at TypeScriptParserMixin.tryParse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/util.ts:174:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3744:20)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:257:12)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:256:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3311:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1825:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1170:21)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:597:12)
+      at TypeScriptParserMixin.parseExprOpRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:582:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:513:27)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:534:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:435:17)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+8:38:00 PM [vite] (client) page reload server_log.txt
+8:38:00 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1358:22)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3192:16)
+      at TypeScriptParserMixin.parseExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:17)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:688:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementLike (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseProgram (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/parser/index.ts:29:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/normalize-file.ts:50:24)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/index.ts:41:36)
+      at run.next (<anonymous>)
+      at transform (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:261:32)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:189:28
+      at <anonymous> (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:113:33
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:287:14)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+8:38:00 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.jsxParseIdentifier (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:278:14)
+      at TypeScriptParserMixin.jsxParseNamespacedName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:288:25)
+      at TypeScriptParserMixin.jsxParseElementName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:306:14)
+      at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:429:24)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:470:35)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElement (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at fn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3745:23)
+      at TypeScriptParserMixin.tryParse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/util.ts:174:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3744:20)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:257:12)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:256:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3311:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1825:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1170:21)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:597:12)
+      at TypeScriptParserMixin.parseExprOpRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:582:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:513:27)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:534:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:435:17)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+8:38:00 PM [vite] (client) page reload server_log.txt
+8:38:00 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1358:22)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3192:16)
+      at TypeScriptParserMixin.parseExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:17)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:688:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementLike (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseProgram (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/parser/index.ts:29:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/normalize-file.ts:50:24)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/index.ts:41:36)
+      at run.next (<anonymous>)
+      at transform (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:261:32)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:189:28
+      at <anonymous> (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:113:33
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:287:14)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+8:38:00 PM [vite] (client) page reload server_log.txt
+8:38:00 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.jsxParseIdentifier (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:278:14)
+      at TypeScriptParserMixin.jsxParseNamespacedName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:288:25)
+      at TypeScriptParserMixin.jsxParseElementName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:306:14)
+      at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:429:24)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:470:35)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElement (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at fn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3745:23)
+      at TypeScriptParserMixin.tryParse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/util.ts:174:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3744:20)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:257:12)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:256:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3311:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1825:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1170:21)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:597:12)
+      at TypeScriptParserMixin.parseExprOpRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:582:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:513:27)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:534:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:435:17)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+8:38:09 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1358:22)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3192:16)
+      at TypeScriptParserMixin.parseExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:17)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:688:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementLike (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseProgram (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/parser/index.ts:29:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/normalize-file.ts:50:24)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/index.ts:41:36)
+      at run.next (<anonymous>)
+      at transform (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:261:32)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:189:28
+      at <anonymous> (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:113:33
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:287:14)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+8:38:09 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.jsxParseIdentifier (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:278:14)
+      at TypeScriptParserMixin.jsxParseNamespacedName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:288:25)
+      at TypeScriptParserMixin.jsxParseElementName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:306:14)
+      at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:429:24)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:470:35)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElement (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at fn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3745:23)
+      at TypeScriptParserMixin.tryParse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/util.ts:174:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3744:20)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:257:12)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:256:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3311:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1825:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1170:21)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:597:12)
+      at TypeScriptParserMixin.parseExprOpRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:582:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:513:27)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:534:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:435:17)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+8:38:09 PM [vite] (client) page reload server_log.txt
+8:38:10 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1358:22)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3192:16)
+      at TypeScriptParserMixin.parseExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:17)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:688:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementLike (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseProgram (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/parser/index.ts:29:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/normalize-file.ts:50:24)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/index.ts:41:36)
+      at run.next (<anonymous>)
+      at transform (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:261:32)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:189:28
+      at <anonymous> (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:113:33
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:287:14)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+8:38:10 PM [vite] (client) page reload server_log.txt
+8:38:10 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.jsxParseIdentifier (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:278:14)
+      at TypeScriptParserMixin.jsxParseNamespacedName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:288:25)
+      at TypeScriptParserMixin.jsxParseElementName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:306:14)
+      at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:429:24)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:470:35)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElement (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at fn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3745:23)
+      at TypeScriptParserMixin.tryParse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/util.ts:174:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3744:20)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:257:12)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:256:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3311:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1825:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1170:21)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:597:12)
+      at TypeScriptParserMixin.parseExprOpRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:582:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:513:27)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:534:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:435:17)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+8:38:10 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1358:22)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3192:16)
+      at TypeScriptParserMixin.parseExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:17)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:688:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementLike (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseProgram (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/parser/index.ts:29:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/normalize-file.ts:50:24)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/index.ts:41:36)
+      at run.next (<anonymous>)
+      at transform (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:261:32)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:189:28
+      at <anonymous> (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:113:33
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:287:14)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+8:38:10 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.jsxParseIdentifier (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:278:14)
+      at TypeScriptParserMixin.jsxParseNamespacedName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:288:25)
+      at TypeScriptParserMixin.jsxParseElementName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:306:14)
+      at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:429:24)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:470:35)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElement (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at fn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3745:23)
+      at TypeScriptParserMixin.tryParse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/util.ts:174:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3744:20)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:257:12)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:256:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3311:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1825:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1170:21)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:597:12)
+      at TypeScriptParserMixin.parseExprOpRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:582:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:513:27)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:534:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:435:17)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+8:38:10 PM [vite] (client) page reload server_log.txt
+8:38:10 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1358:22)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3192:16)
+      at TypeScriptParserMixin.parseExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:17)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:688:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementLike (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseProgram (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/parser/index.ts:29:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/normalize-file.ts:50:24)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/index.ts:41:36)
+      at run.next (<anonymous>)
+      at transform (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:261:32)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:189:28
+      at <anonymous> (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:113:33
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:287:14)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+8:38:10 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.jsxParseIdentifier (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:278:14)
+      at TypeScriptParserMixin.jsxParseNamespacedName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:288:25)
+      at TypeScriptParserMixin.jsxParseElementName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:306:14)
+      at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:429:24)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:470:35)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElement (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at fn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3745:23)
+      at TypeScriptParserMixin.tryParse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/util.ts:174:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3744:20)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:257:12)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:256:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3311:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1825:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1170:21)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:597:12)
+      at TypeScriptParserMixin.parseExprOpRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:582:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:513:27)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:534:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:435:17)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+8:38:10 PM [vite] (client) page reload server_log.txt
+8:38:10 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx: Unexpected token (407:3)
+
+  405 |     }
+  406 |
+> 407 |   }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+      |    ^
+  408 |
+  409 |   // Handle Zoom Operations safely
+  410 |   const handleZoomIn = () => {
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/Chart.tsx:407:3
+  405|      }
+  406|  
+  407|    }, [dimensions, ticks, activeContracts, indicatorConfig, localChartType, zoomLevel, asset, isDark]);
+     |     ^
+  408|  
+  409|    // Handle Zoom Operations safely
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1358:22)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3192:16)
+      at TypeScriptParserMixin.parseExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:17)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:688:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementLike (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockBody (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseProgram (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/parser/index.ts:29:19)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/normalize-file.ts:50:24)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transformation/index.ts:41:36)
+      at run.next (<anonymous>)
+      at transform (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/transform.ts:29:20)
+      at transform.next (<anonymous>)
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:261:32)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:189:28
+      at <anonymous> (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/core/src/gensync-utils/async.ts:90:7)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:113:33
+      at step (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:287:14)
+      at /home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/wizard/Desktop/Project/maritech-inc./node_modules/gensync/index.js:223:11)
+8:38:10 PM [vite] (client) page reload server_log.txt
+8:38:10 PM [vite] Internal server error: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx: Unexpected token (494:74)
+
+  492 |                   DIGIT UNDER ▼
+  493 |                 </span>
+> 494 |                 <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+      |                                                                           ^
+  495 |               </div>
+  496 |               <div className="text-right font-mono font-bold text-xs">
+  497 |                 ${payoutPotential.toFixed(2)}
+  Plugin: vite:react-babel
+  File: /home/wizard/Desktop/Project/maritech-inc./src/components/TradeControls.tsx:494:74
+  492|                    DIGIT UNDER ▼
+  493|                  </span>
+  494|                  <span className="text-[9px] text-purple-100">Last digit < {targetDigit}</span>
+     |                                                                            ^
+  495|                </div>
+  496|                <div className="text-right font-mono font-bold text-xs">
+      at toParseError (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parse-error.ts:95:45)
+      at TypeScriptParserMixin.raise (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.unexpected (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/tokenizer/index.ts:1544:16)
+      at TypeScriptParserMixin.jsxParseIdentifier (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:278:14)
+      at TypeScriptParserMixin.jsxParseNamespacedName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:288:25)
+      at TypeScriptParserMixin.jsxParseElementName (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:306:14)
+      at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:429:24)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:470:35)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:483:34)
+      at TypeScriptParserMixin.jsxParseElement (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:559:19)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:573:21)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:429:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at fn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3745:23)
+      at TypeScriptParserMixin.tryParse (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/util.ts:174:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3744:20)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:257:12)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:256:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3311:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1825:16)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:1170:21)
+      at TypeScriptParserMixin.parseExprAtom (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/jsx/index.ts:583:22)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:742:23)
+      at TypeScriptParserMixin.parseUpdate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:721:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:683:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3893:20)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:417:14)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:597:12)
+      at TypeScriptParserMixin.parseExprOpRightExpr (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:582:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:513:27)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:534:21)
+      at TypeScriptParserMixin.parseExprOp (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:2872:20)
+      at TypeScriptParserMixin.parseExprOps (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:435:17)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:384:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:301:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/plugins/typescript/index.ts:3764:22)
+      at TypeScriptParserMixin.parseExpressionBase (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:226:23)
+      at callback (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:217:39)
+      at TypeScriptParserMixin.allowInAnd (/home/wizard/Desktop/Project/maritech-inc./node_modules/@babel/parser/src/parser/expression.ts:3197:12)

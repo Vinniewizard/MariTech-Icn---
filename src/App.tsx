@@ -6,6 +6,7 @@ import WizardBot from './components/WizardBot';
 import CashierModal from './components/CashierModal';
 import GuideModal from './components/GuideModal';
 import SettingsModal from './components/SettingsModal';
+import InviteModal from './components/InviteModal';
 import AdminDashboard from './components/AdminDashboard';
 import AuthModal from './components/AuthModal';
 import PriceAlertsManager from './components/PriceAlertsManager';
@@ -119,12 +120,32 @@ export default function App() {
     }
   }, [theme]);
 
-  // Account states: Logged out by default on first visit
+  // Account states: Pre-loaded with lucasantiago818 on first visit
   const [currentUser, setCurrentUser] = useState<any>(() => {
     const isLoggedOut = localStorage.getItem('lwex_logged_out') === 'true';
     if (isLoggedOut) return null;
     const saved = localStorage.getItem('lwex_current_user');
-    return saved ? JSON.parse(saved) : null;
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error('Failed to parse current user from storage', e);
+      }
+    }
+    // Default user on first load
+    return {
+      id: "lucasantiago_default",
+      email: "lucasantiago818@gmail.com",
+      fullName: "lucasantiago818",
+      phone: "+254712345678",
+      country: "Kenya",
+      balance: 25678.91,
+      accountType: "demo",
+      forceOutcome: "",
+      profitTarget: 0.00,
+      maxWinLimit: 0.00,
+      maxLossLimit: 0.00
+    };
   });
 
   const [account, setAccount] = useState<Account>(() => {
@@ -136,11 +157,12 @@ export default function App() {
         console.error('Failed to parse account from storage', e);
       }
     }
+    // Match the pre-loaded lucasantiago818 default balance if there was no saved session
     return {
       mode: 'demo',
-      balance: 10000.00,
+      balance: 25678.91,
       currency: 'USD',
-      id: 'demo-temp-acc'
+      id: 'm-ac-lucasantiago_default'
     };
   });
 
@@ -234,6 +256,8 @@ export default function App() {
   const [spotPriceLimit, setSpotPriceLimit] = useState<number>(activeAsset.price);
   const [spotType, setSpotType] = useState<'limit' | 'market'>('limit');
   const [spotAmount, setSpotAmount] = useState<string>('0.05');
+  const [spotDuration, setSpotDuration] = useState<number>(5);
+  const [spotDurationUnit, setSpotDurationUnit] = useState<'ticks' | 'seconds' | 'minutes'>('seconds');
 
   // Sync limit input on active asset swaps
   useEffect(() => {
@@ -245,7 +269,21 @@ export default function App() {
     volatilityMultiplier: number;
     forceOutcome?: 'win' | 'loss';
     realWinRate?: number;
-  }>({ globalTrendBias: 0, volatilityMultiplier: 1, realWinRate: 30 });
+    paybillEnabled?: boolean;
+    btcEnabled?: boolean;
+    minDeposit?: number;
+    minWithdrawal?: number;
+    cashoutMode?: 'enabled' | 'disabled' | 'smart';
+  }>({
+    globalTrendBias: 0,
+    volatilityMultiplier: 1,
+    realWinRate: 30,
+    paybillEnabled: true,
+    btcEnabled: true,
+    minDeposit: 1,
+    minWithdrawal: 10,
+    cashoutMode: 'enabled'
+  });
 
   const gameSettingsRef = useRef(gameSettings);
 
@@ -285,6 +323,7 @@ export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [authModalInitialView, setAuthModalInitialView] = useState<'login' | 'register'>('login');
   
   const handleTriggerAuth = (view: 'login' | 'register') => {
@@ -329,13 +368,36 @@ export default function App() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await fetch('/api/settings/game');
+        const userIdParam = currentUser ? `?userId=${currentUser.id}` : '';
+        const res = await fetch(`/api/settings/game${userIdParam}`);
         if (!res.ok) {
           throw new Error(`HTTP error ${res.status}`);
         }
         const data = await res.json();
         if (data && data.success) {
           setGameSettings(data.settings);
+          if (data.userOverride) {
+            setCurrentUser(prevUser => {
+              if (!prevUser) return null;
+              const updated = {
+                ...prevUser,
+                forceOutcome: data.userOverride.forceOutcome,
+                profitTarget: data.userOverride.profitTarget,
+                maxWinLimit: data.userOverride.maxWinLimit,
+                maxLossLimit: data.userOverride.maxLossLimit
+              };
+              localStorage.setItem('lwex_current_user', JSON.stringify(updated));
+              return updated;
+            });
+            
+            setAccount(prevAcc => {
+              const freshBalance = prevAcc.mode === 'real' ? data.userOverride.realBalance : data.userOverride.demoBalance;
+              if (prevAcc.balance !== freshBalance) {
+                return { ...prevAcc, balance: freshBalance };
+              }
+              return prevAcc;
+            });
+          }
         }
       } catch (err) {
         // console.error('Failed to fetch game settings:', err);
@@ -645,7 +707,15 @@ export default function App() {
           if (nextPrice === undefined || contract.status !== 'active') return contract;
 
           const ticksPassed = contract.ticksPassed + 1;
-          const isExpired = ticksPassed >= contract.duration;
+          
+          let totalDurationInSeconds = contract.duration;
+          if (contract.durationUnit === 'minutes') {
+            totalDurationInSeconds = contract.duration * 60;
+          } else if (contract.durationUnit === 'ticks') {
+            totalDurationInSeconds = contract.duration; // 1 tick = 1 second
+          }
+          
+          const isExpired = ticksPassed >= totalDurationInSeconds;
 
           // Proximity checks for profit
           let currentProfit = 0;
@@ -704,14 +774,38 @@ export default function App() {
             let finalStatus = status !== 'active' ? status : (currentProfit >= 0 ? 'won' : 'lost');
             
             // Admin Override
-            const force = gameSettingsRef.current.forceOutcome;
+            let force = currentUser?.forceOutcome || gameSettingsRef.current.forceOutcome;
+            
+            // Profit Target override: if user's real balance exceeds target, force loss
+            if (accountRef.current.mode === 'real' && currentUser?.profitTarget > 0 && realAccountBalance >= currentUser?.profitTarget) {
+               force = 'loss';
+            }
+
             if (force === 'win') finalStatus = 'won';
             if (force === 'loss') finalStatus = 'lost';
 
-            const earned = finalStatus === 'won' ? contract.payout : 0;
-            if (earned > 0) {
-              balanceDelta += earned;
+            // Settlement math after trade closes/finishes (User feedback)
+            const isWon = finalStatus === 'won';
+            let netProfit = isWon ? (contract.payout - contract.stake) : -contract.stake;
+
+            // Apply Admin win limits
+            if (isWon && currentUser?.maxWinLimit && currentUser.maxWinLimit > 0 && netProfit > currentUser.maxWinLimit) {
+              netProfit = currentUser.maxWinLimit;
+              setTimeout(() => {
+                triggerToast(`Win capped at maximum allowed Single Trade Limit of $${currentUser.maxWinLimit?.toFixed(2)}`, false);
+              }, 400);
             }
+
+            // Apply Admin loss limits
+            if (!isWon && currentUser?.maxLossLimit && currentUser.maxLossLimit > 0 && Math.abs(netProfit) > currentUser.maxLossLimit) {
+              netProfit = -currentUser.maxLossLimit;
+              setTimeout(() => {
+                triggerToast(`Loss subsidized: Capped at maximum allowed Single Trade Limit of $${currentUser.maxLossLimit?.toFixed(2)}`, true);
+              }, 400);
+            }
+
+            const finalPayout = contract.stake + netProfit;
+            balanceDelta += netProfit;
 
             newHistoryItems.push({
               id: contract.id,
@@ -720,8 +814,8 @@ export default function App() {
               type: contract.type,
               direction: contract.direction,
               stake: contract.stake,
-              payout: contract.payout,
-              profit: finalStatus === 'won' ? contract.payout - contract.stake : -contract.stake,
+              payout: finalPayout,
+              profit: netProfit,
               status: finalStatus,
               entryPrice: contract.entryPrice,
               exitPrice: nextPrice,
@@ -731,15 +825,15 @@ export default function App() {
             const hasWon = finalStatus === 'won';
             triggerToast(
               hasWon
-                ? `Contract Succeeded! Cleared payout +$${contract.payout.toFixed(2)} on ${contract.assetSymbol}.`
-                : `Contract Expired. Loss -$${contract.stake.toFixed(2)} on ${contract.assetSymbol}.`,
+                ? `Contract Succeeded! Cleared profit +$${netProfit.toFixed(2)} on ${contract.assetSymbol}.`
+                : `Contract Expired. Loss -$${Math.abs(netProfit).toFixed(2)} on ${contract.assetSymbol}.`,
               hasWon
             );
 
             return null as any;
           }
 
-          const ratioRemaining = (contract.duration - ticksPassed) / contract.duration;
+          const ratioRemaining = (totalDurationInSeconds - ticksPassed) / totalDurationInSeconds;
           const baseSell = contract.stake * 0.90;
           const sellPrice = currentProfit >= 0
             ? baseSell + currentProfit * (1 - ratioRemaining * 0.4)
@@ -755,7 +849,7 @@ export default function App() {
           };
         }).filter(Boolean);
 
-        if (balanceDelta > 0) {
+        if (balanceDelta !== 0) {
           setAccount((prevAcc) => ({ ...prevAcc, balance: prevAcc.balance + balanceDelta }));
         }
 
@@ -783,9 +877,11 @@ export default function App() {
     barrierOffset?: number;
     targetDigit?: number;
   }) => {
-    // Standard balances verification
-    if (account.balance < config.stake) {
-      triggerToast("Transaction Rejected: Insufficient balance.", false);
+    // Standard balances verification using Free Margin (User feedback)
+    const activeStakes = activeContracts.reduce((sum, c) => sum + c.stake, 0);
+    const freeBal = account.balance - activeStakes;
+    if (freeBal < config.stake) {
+      triggerToast("Transaction Rejected: Insufficient available funds after open positions.", false);
       return;
     }
 
@@ -828,7 +924,6 @@ export default function App() {
       ticksHistory: [{ time: Date.now(), price: latestPrice }]
     };
 
-    setAccount((prevAcc) => ({ ...prevAcc, balance: prevAcc.balance - config.stake }));
     setActiveContracts((prev) => [...prev, newContract]);
 
     triggerToast(`Options Contract secured: Purchased ${config.direction.toUpperCase()} on ${activeAsset.symbol}.`, true);
@@ -839,8 +934,9 @@ export default function App() {
     if (!contract || contract.status !== 'active') return;
 
     const refund = contract.sellPrice || contract.stake * 0.5;
+    const netProfit = refund - contract.stake;
 
-    setAccount((prevAcc) => ({ ...prevAcc, balance: prevAcc.balance + refund }));
+    setAccount((prevAcc) => ({ ...prevAcc, balance: prevAcc.balance + netProfit }));
 
     setTradeHistory((prevHistory) => {
       if (prevHistory.some((h) => h.id === contract.id)) return prevHistory;
@@ -908,27 +1004,48 @@ export default function App() {
     }
 
     const calculatedStake = activeAsset.price * amountNum;
-    if (account.balance < calculatedStake && direction === 'buy') {
-      triggerToast("Transaction Rejected: Insufficient USD funds.", false);
+    
+    // Check against available/free balance since stake is settled on completion
+    const activeStakesValue = activeContracts.reduce((sum, c) => sum + c.stake, 0);
+    const freeBalVal = account.balance - activeStakesValue;
+    
+    if (freeBalVal < calculatedStake) {
+      triggerToast("Transaction Rejected: Insufficient USD funds available.", false);
       return;
     }
 
     handleAddPriceAlert(activeAsset.price, 'above');
 
-    // Simulate buying options using the Spot Panel inputs seamlessly!
+    // Simulate buying options using the Spot Panel inputs seamlessly with custom duration settings
     handlePurchaseContract({
       type: 'rise-fall',
       direction: direction === 'buy' ? 'rise' : 'fall',
-      stake: Math.min(account.balance, Math.max(10, calculatedStake)),
-      duration: 5,
-      durationUnit: 'ticks'
+      stake: Math.max(10, calculatedStake),
+      duration: spotDuration,
+      durationUnit: spotDurationUnit
     });
   };
 
   const handlePresetPercentage = (percentage: number) => {
-    const alloc = (account.balance * (percentage / 100)) / activeAsset.price;
+    // Allocation based on Available balance instead of raw balance
+    const activeStakesValue = activeContracts.reduce((sum, c) => sum + c.stake, 0);
+    const freeBalVal = account.balance - activeStakesValue;
+    const alloc = (freeBalVal * (percentage / 100)) / activeAsset.price;
     setSpotAmount(alloc.toFixed(activeAsset.decimals > 2 ? 4 : 2));
   };
+
+  const handleUsdChange = (usdVal: string) => {
+    const usdNum = parseFloat(usdVal) || 0;
+    if (usdNum > 0 && activeAsset.price > 0) {
+      const cryptoQty = usdNum / activeAsset.price;
+      setSpotAmount(cryptoQty.toFixed(activeAsset.decimals > 2 ? 4 : 2));
+    } else {
+      setSpotAmount('');
+    }
+  };
+
+  const amountNum = parseFloat(spotAmount);
+  const estimatedCostUsd = !isNaN(amountNum) && amountNum > 0 ? amountNum * activeAsset.price : 0;
 
   const activeTicks = assetsTicksMap[activeAsset.id] || [];
 
@@ -975,6 +1092,8 @@ export default function App() {
   };
 
   const isDark = theme === 'dark';
+  const activeStakes = activeContracts.reduce((sum, c) => sum + c.stake, 0);
+  const freeBalance = account.balance - activeStakes;
 
   return (
     <div className={`w-screen h-screen font-sans ${isDark ? 'elegant-radial-bg bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'} flex flex-row transition-colors duration-200 overflow-hidden relative`}>
@@ -1164,10 +1283,14 @@ export default function App() {
 
           <button 
             onClick={() => { 
-              triggerToast("Affiliate referral links ready! Shared 50% commission scheme with active tracker.", true); 
+              setIsInviteOpen(true);
               setSidebarOpen(false); 
             }}
-            className={`flex items-center ${desktopSidebarCollapsed ? 'lg:justify-center p-2.5' : 'justify-between px-3.5 py-2.5'} w-full rounded-lg text-xs font-bold text-slate-450 hover:bg-slate-900/50 hover:text-white transition-all cursor-pointer`}
+            className={`flex items-center ${desktopSidebarCollapsed ? 'lg:justify-center p-2.5' : 'justify-between px-3.5 py-2.5'} w-full rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              isInviteOpen
+                ? 'bg-amber-500 text-slate-950 font-black shadow-md'
+                : 'text-slate-450 hover:bg-slate-900/50 hover:text-white'
+            }`}
             title={desktopSidebarCollapsed ? "Invite Friends" : undefined}
           >
             <div className={`flex items-center ${desktopSidebarCollapsed ? '' : 'space-x-3'}`}>
@@ -1657,7 +1780,10 @@ export default function App() {
         {/* ========================================================= */}
         {/* 2.3 MAIN WORKSPACE PANEL (Split center & right columns) */}
         {/* ========================================================= */}
-        <div className="flex-1 p-3 md:p-5 flex flex-col xl:flex-row gap-5 overflow-y-auto w-full">
+        <div className="flex-1 p-3 md:p-5 flex flex-col gap-5 overflow-y-auto w-full">
+          
+          {/* Main workspace layout grid: Left column (chart/swap) and Right column (book/indicators) */}
+          <div className="flex flex-col xl:flex-row gap-5 w-full">
           
           {/* ===================================================== */}
           {/* CENTER-LEFT COLUMN (Chart, Draw toolbar, Spot panel, Positions) */}
@@ -1748,232 +1874,341 @@ export default function App() {
               </div>
             </div>
 
-            {/* TradingView styled interactive Area with floating tools */}
-            <div className={`rounded-xl border ${isDark ? 'bg-slate-950/20 border-slate-900' : 'bg-white border-slate-200'} p-3 flex flex-col gap-2 min-h-[460px] relative overflow-hidden`}>
+
+            {/* Unified Trading Terminal Workspace Grid (User Requested layout) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
               
-              {/* Horizontal drawing toolbar on Top of chart */}
-              <div className="w-full flex items-center justify-start px-2 py-1 space-x-2 border-b border-slate-900 shrink-0 select-none">
-                <button 
-                  onClick={() => triggerToast("TV crosshair cursor highlighted.", true)}
-                  className="p-1 rounded-md hover:bg-slate-900 hover:text-white text-slate-500 hover:scale-105 active:scale-95 transition-transform" 
-                  title="Crosshair pointer"
-                >
-                  <Search className="w-3.5 h-3.5" />
-                </button>
-                <button 
-                  onClick={() => triggerToast("Trendline drawing anchor mode ready. Drag click anchors on chart canvas.", true)}
-                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-amber-400 hover:scale-105 transition-all" 
-                  title="Draw Trendline"
-                >
-                  <TrendingUp className="w-3.5 h-3.5" />
-                </button>
-                <button 
-                  onClick={() => triggerToast("Brushes and pencil drawing tools active.", true)}
-                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-purple-400 transition-all" 
-                  title="Brush drawing board"
-                >
-                  <Bot className="w-3.5 h-3.5" />
-                </button>
-                <div className="h-4 w-[1px] bg-slate-800 mx-1" />
-                <button 
-                  onClick={() => triggerToast("Fibers Fibonacci Retracement bands overlay activated.", true)}
-                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-amber-400 transition-all" 
-                  title="Fibonacci Retracements"
-                >
-                  <Award className="w-3.5 h-3.5" />
-                </button>
-                <button 
-                  onClick={() => triggerToast("Measuring grid tools highlighted. Click chart coordinates.", true)}
-                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-blue-400 transition-all" 
-                  title="Distance Measure Scale"
-                >
-                  <Activity className="w-3.5 h-3.5 font-bold" />
-                </button>
-                <div className="flex-1"></div>
-                <button 
-                  onClick={() => triggerToast("Reset drawings and clear canvas annotations.", true)}
-                  className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-rose-500 transition-colors" 
-                  title="Garbage Reset All Drawings"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-              {/* Central Chart Rendering Area */}
-              <div className="flex-1 flex flex-col min-w-0">
-                <Chart 
-                  theme={theme}
-                  asset={activeAsset}
-                  ticks={activeTicks}
-                  activeContracts={activeContracts}
-                  indicatorConfig={indicatorConfig}
-                  chartType={chartType}
-                  onToggleChartType={(newType) => setChartType(newType)}
-                  onToggleIndicator={handleToggleIndicator}
-                />
-              </div>
-            </div>
-
-            {/* Spot Buy & Sell Command Form Center Pane */}
-            <div className={`p-5 rounded-xl border ${isDark ? 'bg-slate-950/40 border-slate-900' : 'bg-white border-slate-200'} flex flex-col space-y-4 shrink-0`}>
-              {/* Tab headers */}
-              <div className="flex border-b border-slate-900 pb-2.5 justify-between items-center">
-                <div className="flex space-x-5 text-xs font-bold uppercase tracking-wider select-none">
-                  <button className="border-b-2 border-amber-500 pb-2 text-white">Classic Spot</button>
-                  <button className="text-slate-500 hover:text-slate-300 pb-2 transition-colors">Cross Margin 5X</button>
-                  <button className="text-slate-500 hover:text-slate-300 pb-2 transition-colors">Leveraged Futures 50X</button>
-                </div>
-                <div className="flex space-x-1 p-0.5 rounded-lg bg-slate-900/60 border border-slate-900 text-[10px] font-mono leading-none">
-                  <button 
-                    onClick={() => setSpotType('limit')}
-                    className={`px-2.5 py-1.5 rounded uppercase font-black ${spotType === 'limit' ? 'bg-amber-500 text-slate-950' : 'text-slate-400'}`}
-                  >
-                    Limit Buy
-                  </button>
-                  <button 
-                    onClick={() => setSpotType('market')}
-                    className={`px-2.5 py-1.5 rounded uppercase font-black ${spotType === 'market' ? 'bg-amber-500 text-slate-950' : 'text-slate-400'}`}
-                  >
-                    Market Buy
-                  </button>
-                </div>
-              </div>
-
-              {/* Grid content buy / sell sides side-by-side */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* LEFT SIDE: Interactive Trading Grid (Chart) */}
+              <div className={`lg:col-span-8 rounded-xl border ${isDark ? 'bg-slate-950/20 border-slate-900' : 'bg-white border-slate-200'} p-3 flex flex-col gap-2 min-h-[460px] relative overflow-hidden h-full`}>
                 
-                {/* BUY BTC SIDE */}
-                <div className="space-y-3.5">
-                  <div className="flex justify-between text-[11px] font-mono font-bold">
-                    <span className="text-slate-450 uppercase">WALLET USDT FUNDS</span>
-                    <span className="text-[#a855f7]">${formatBalance(account.balance)} USDT</span>
-                  </div>
-
-                  {spotType === 'limit' ? (
-                    <div className="flex items-center rounded-lg border border-slate-900 bg-slate-900/10 px-3 py-2">
-                      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none pointer-events-none select-none">LIMIT PRICE</span>
-                      <input 
-                        type="number" 
-                        step={activeAsset.decimals > 2 ? 0.0001 : 1}
-                        value={spotPriceLimit} 
-                        onChange={(e) => setSpotPriceLimit(parseFloat(e.target.value) || activeAsset.price)}
-                        className="w-full bg-transparent border-none text-right font-mono text-xs font-extrabold focus:outline-none focus:ring-0" 
-                      />
-                      <span className="text-[10px] text-slate-400 font-mono ml-1.5">USDT</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center rounded-lg border border-slate-900 bg-slate-900/10 px-3 py-2 justify-between">
-                      <span className="text-[10px] font-black text-slate-500 uppercase">MARKET PRICE</span>
-                      <span className="font-mono text-xs font-extrabold text-emerald-500">Executes on best bid spot</span>
-                    </div>
-                  )}
-
-                  <div className="flex items-center rounded-lg border border-slate-900 bg-slate-900/10 px-3 py-2">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none pointer-events-none select-none">ORDER TOTAL</span>
-                    <input 
-                      type="text" 
-                      value={spotAmount} 
-                      onChange={(e) => setSpotAmount(e.target.value)}
-                      className="w-full bg-transparent border-none text-right font-mono text-xs font-extrabold focus:outline-none focus:ring-0" 
-                    />
-                    <span className="text-[10px] text-slate-400 font-mono ml-1.5 uppercase font-black">{activeAsset.symbol}</span>
-                  </div>
-
-                  {/* Percentage indicators presets */}
-                  <div className="grid grid-cols-5 gap-1.5 pt-1">
-                    {[10, 25, 50, 75, 100].map((perc) => (
-                      <button 
-                        key={perc} 
-                        onClick={() => handlePresetPercentage(perc)}
-                        className="rounded py-1 text-[9px] font-mono font-bold border border-slate-900 hover:border-slate-700 bg-slate-900/40 text-slate-400 hover:text-white transition-colors"
-                      >
-                        {perc}%
-                      </button>
-                    ))}
-                  </div>
-
+                {/* Horizontal drawing toolbar on Top of chart */}
+                <div className="w-full flex items-center justify-start px-2 py-1 space-x-2 border-b border-slate-900 shrink-0 select-none">
                   <button 
-                    onClick={() => executeSpotTrade('buy')}
-                    className="w-full rounded-md bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-2.5 text-xs uppercase shadow-sm active:scale-95 transition-all text-center select-none cursor-pointer"
+                    onClick={() => triggerToast("TV crosshair cursor highlighted.", true)}
+                    className="p-1 rounded-md hover:bg-slate-900 hover:text-white text-slate-500 hover:scale-105 active:scale-95 transition-transform" 
+                    title="Crosshair pointer"
                   >
-                    Buy LONG ({activeAsset.symbol})
+                    <Search className="w-3.5 h-3.5" />
+                  </button>
+                  <button 
+                    onClick={() => triggerToast("Trendline drawing anchor mode ready. Drag click anchors on chart canvas.", true)}
+                    className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-amber-400 hover:scale-105 transition-all" 
+                    title="Draw Trendline"
+                  >
+                    <TrendingUp className="w-3.5 h-3.5" />
+                  </button>
+                  <button 
+                    onClick={() => triggerToast("Brushes and pencil drawing tools active.", true)}
+                    className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-purple-400 transition-all" 
+                    title="Brush drawing board"
+                  >
+                    <Bot className="w-3.5 h-3.5" />
+                  </button>
+                  <div className="h-4 w-[1px] bg-slate-800 mx-1" />
+                  <button 
+                    onClick={() => triggerToast("Fibers Fibonacci Retracement bands overlay activated.", true)}
+                    className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-amber-400 transition-all" 
+                    title="Fibonacci Retracements"
+                  >
+                    <Award className="w-3.5 h-3.5" />
+                  </button>
+                  <button 
+                    onClick={() => triggerToast("Measuring grid tools highlighted. Click chart coordinates.", true)}
+                    className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-blue-400 transition-all" 
+                    title="Distance Measure Scale"
+                  >
+                    <Activity className="w-3.5 h-3.5 font-bold" />
+                  </button>
+                  <div className="flex-1"></div>
+                  <button 
+                    onClick={() => triggerToast("Reset drawings and clear canvas annotations.", true)}
+                    className="p-1 rounded-md hover:bg-slate-900 text-slate-400 hover:text-rose-500 transition-colors" 
+                    title="Garbage Reset All Drawings"
+                  >
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                {/* SELL BTC SIDE */}
-                <div className="space-y-3.5">
-                  <div className="flex justify-between text-[11px] font-mono font-bold">
-                    <span className="text-slate-450 uppercase">AVAILABLE EXCH CREDIT</span>
-                    <span className="text-[#f59e0b]">0.654321 {activeAsset.symbol}</span>
+                {/* Central Chart Rendering Area */}
+                <div className="flex-1 flex flex-col min-w-0">
+                  <Chart 
+                    theme={theme}
+                    asset={activeAsset}
+                    ticks={activeTicks}
+                    activeContracts={activeContracts}
+                    indicatorConfig={indicatorConfig}
+                    chartType={chartType}
+                    onToggleChartType={(newType) => setChartType(newType)}
+                    onToggleIndicator={handleToggleIndicator}
+                  />
+                </div>
+              </div>
+
+              {/* RIGHT SIDE: Compact Multi-column Order Execution controls */}
+              <div className={`lg:col-span-4 p-4 rounded-xl border ${isDark ? 'bg-slate-950/40 border-slate-900' : 'bg-white border-slate-200'} flex flex-col justify-between space-y-4`}>
+                
+                {/* Panel Title & Type Selector */}
+                <div className="space-y-3 shrink-0">
+                  <div className="flex justify-between items-center pb-2 border-b border-slate-905">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-200">Terminal Trade Box</span>
+                    <span className="text-[10px] text-emerald-500 font-mono font-bold uppercase bg-emerald-500/10 px-2 py-0.5 rounded animate-pulse">
+                      Live Markets
+                    </span>
                   </div>
 
-                  {spotType === 'limit' ? (
-                    <div className="flex items-center rounded-lg border border-slate-900 bg-slate-900/10 px-3 py-2">
-                      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none pointer-events-none select-none">LIMIT PRICE</span>
-                      <input 
-                        type="number" 
-                        step={activeAsset.decimals > 2 ? 0.0001 : 1}
-                        value={spotPriceLimit} 
-                        onChange={(e) => setSpotPriceLimit(parseFloat(e.target.value) || activeAsset.price)}
-                        className="w-full bg-transparent border-none text-right font-mono text-xs font-extrabold focus:outline-none focus:ring-0" 
-                      />
-                      <span className="text-[10px] text-slate-400 font-mono ml-1.5">USDT</span>
+                  {/* Order Execution modes toggles */}
+                  <div className="flex p-0.5 rounded-lg bg-slate-950 border border-slate-900 text-[10px] font-mono leading-none items-center justify-between">
+                    <button 
+                      onClick={() => setSpotType('limit')}
+                      className={`flex-1 text-center py-2 rounded uppercase font-bold transition-all ${spotType === 'limit' ? 'bg-amber-500 text-slate-950 font-black' : 'text-slate-400 hover:text-white'}`}
+                    >
+                      Limit Price
+                    </button>
+                    <button 
+                      onClick={() => setSpotType('market')}
+                      className={`flex-1 text-center py-2 rounded uppercase font-bold transition-all ${spotType === 'market' ? 'bg-amber-500 text-slate-950 font-black' : 'text-slate-400 hover:text-white'}`}
+                    >
+                      Market Price
+                    </button>
+                  </div>
+                </div>
+
+                {/* DURATION INPUT UNIT (ticks, seconds, minutes) - CUSTOM REQUEST */}
+                <div className="space-y-1.5 p-3 rounded-lg border border-slate-900 bg-slate-950/50">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Settle Duration</label>
+                    <span className="text-[9px] font-mono text-amber-500">Auto close timer</span>
+                  </div>
+                  <div className="grid grid-cols-12 gap-2">
+                    {/* Number input */}
+                    <input 
+                      type="number" 
+                      min="1" 
+                      max="300"
+                      value={spotDuration}
+                      onChange={(e) => setSpotDuration(Math.max(1, parseInt(e.target.value) || 1))}
+                      className="col-span-5 bg-slate-950 border border-slate-900 rounded-lg text-center font-mono text-xs font-extrabold focus:outline-none focus:border-amber-500 text-white p-2"
+                    />
+                    {/* Unit Toggle Buttons */}
+                    <div className="col-span-7 flex rounded-lg bg-slate-950 border border-slate-900 p-0.5 text-[9px] font-mono">
+                      {(['ticks', 'seconds', 'minutes'] as const).map((unit) => (
+                        <button
+                          key={unit}
+                          onClick={() => setSpotDurationUnit(unit)}
+                          className={`flex-1 text-center py-1.5 rounded uppercase font-bold transition-all ${spotDurationUnit === unit ? 'bg-amber-500/25 text-amber-400 font-extrabold' : 'text-slate-500 hover:text-slate-300'}`}
+                        >
+                          {unit === 'ticks' ? 'Ticks' : unit === 'seconds' ? 'Sec' : 'Min'}
+                        </button>
+                      ))}
                     </div>
-                  ) : (
-                    <div className="flex items-center rounded-lg border border-slate-900 bg-slate-900/10 px-3 py-2 justify-between">
-                      <span className="text-[10px] font-black text-slate-500 uppercase">MARKET PRICE</span>
-                      <span className="font-mono text-xs font-extrabold text-rose-500">Executes on best ask spot</span>
+                  </div>
+                  <div className="text-[9px] text-slate-500 italic mt-1 text-center select-none font-mono">
+                    Trade closes and settles automatically in {spotDuration} {spotDurationUnit}
+                  </div>
+                </div>
+
+                {/* BUY LONG AND SELL SHORT COLUMN SECTIONS Side-by-Side (2 Columns requested!) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 sm:xl:grid-cols-2 gap-3 flex-1 overflow-y-auto min-h-0">
+                  
+                  {/* BUY LONG COLUMN */}
+                  <div className="space-y-3 p-3 rounded-lg bg-slate-950/25 border border-slate-900 flex flex-col justify-between">
+                    <div className="flex justify-between items-center text-[10px] font-mono border-b border-slate-900/45 pb-1.5">
+                      <span className="text-emerald-500 font-extrabold flex items-center gap-1 uppercase">
+                        <span className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Buy LONG ({activeAsset.symbol})
+                      </span>
+                    </div>
+
+                    {spotType === 'limit' && (
+                      <div className="space-y-0.5">
+                        <label className="text-[8px] font-bold text-slate-400 uppercase tracking-wider block">Limit (USDT)</label>
+                        <input 
+                          type="number" 
+                          step={activeAsset.decimals > 2 ? 0.0001 : 1}
+                          value={spotPriceLimit} 
+                          onChange={(e) => setSpotPriceLimit(parseFloat(e.target.value) || activeAsset.price)}
+                          className="w-full bg-slate-950 border border-slate-900 rounded text-center font-mono text-xs font-bold py-1 text-white focus:outline-none focus:border-emerald-500" 
+                        />
+                      </div>
+                    )}
+
+                    <div className="space-y-1.5">
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <div>
+                          <label className="text-[8px] font-bold text-slate-400 uppercase tracking-wider block">Qty ({activeAsset.symbol})</label>
+                          <input 
+                            type="number" 
+                            step="any"
+                            placeholder="0.00"
+                            value={spotAmount} 
+                            onChange={(e) => setSpotAmount(e.target.value)}
+                            className="w-full bg-slate-950 border border-slate-900 rounded text-center font-mono text-[11px] font-bold py-1 text-white" 
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[8px] font-bold text-slate-400 uppercase tracking-wider block">Stake (USD)</label>
+                          <input 
+                            type="number" 
+                            step="any"
+                            placeholder="0.00"
+                            value={estimatedCostUsd > 0 ? estimatedCostUsd.toFixed(2) : ''} 
+                            onChange={(e) => handleUsdChange(e.target.value)}
+                            className="w-full bg-slate-950 border border-slate-900 rounded text-center font-mono text-[11px] font-bold py-1 text-white" 
+                          />
+                        </div>
+                      </div>
+
+                      {/* Presets */}
+                      <div className="grid grid-cols-5 gap-1">
+                        {[10, 25, 50, 75, 100].map((perc) => (
+                          <button 
+                            key={perc} 
+                            onClick={() => handlePresetPercentage(perc)}
+                            className="rounded py-0.5 text-[8px] font-mono font-bold border border-slate-900 bg-slate-950 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                          >
+                            {perc}%
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={() => executeSpotTrade('buy')}
+                      className="w-full rounded bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-slate-950 font-black py-2 text-xs uppercase transition-all text-center select-none cursor-pointer shadow hover:shadow-emerald-500/10 mt-2"
+                    >
+                      Buy LONG
+                    </button>
+                  </div>
+
+                  {/* SELL SHORT COLUMN */}
+                  <div className="space-y-3 p-3 rounded-lg bg-slate-950/25 border border-slate-900 flex flex-col justify-between">
+                    <div className="flex justify-between items-center text-[10px] font-mono border-b border-slate-900/45 pb-1.5">
+                      <span className="text-rose-500 font-extrabold flex items-center gap-1 uppercase">
+                        <span className="h-1 w-1 rounded-full bg-rose-500 animate-pulse"></span>
+                        Sell SHORT ({activeAsset.symbol})
+                      </span>
+                    </div>
+
+                    {spotType === 'limit' && (
+                      <div className="space-y-0.5">
+                        <label className="text-[8px] font-bold text-slate-400 uppercase block tracking-wider">Limit (USDT)</label>
+                        <input 
+                          type="number" 
+                          step={activeAsset.decimals > 2 ? 0.0001 : 1}
+                          value={spotPriceLimit} 
+                          onChange={(e) => setSpotPriceLimit(parseFloat(e.target.value) || activeAsset.price)}
+                          className="w-full bg-slate-950 border border-slate-900 rounded text-center font-mono text-xs font-bold py-1 text-white focus:outline-none focus:border-rose-500" 
+                        />
+                      </div>
+                    )}
+
+                    <div className="space-y-1.5">
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <div>
+                          <label className="text-[8px] font-bold text-slate-400 uppercase block tracking-wider">Qty ({activeAsset.symbol})</label>
+                          <input 
+                            type="number" 
+                            step="any"
+                            placeholder="0.00"
+                            value={spotAmount} 
+                            onChange={(e) => setSpotAmount(e.target.value)}
+                            className="w-full bg-slate-950 border border-slate-900 rounded text-center font-mono text-[11px] font-bold py-1 text-white" 
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[8px] font-bold text-slate-400 uppercase block tracking-wider">Stake (USD)</label>
+                          <input 
+                            type="number" 
+                            step="any"
+                            placeholder="0.00"
+                            value={estimatedCostUsd > 0 ? estimatedCostUsd.toFixed(2) : ''} 
+                            onChange={(e) => handleUsdChange(e.target.value)}
+                            className="w-full bg-slate-950 border border-slate-900 rounded text-center font-mono text-[11px] font-bold py-1 text-white" 
+                          />
+                        </div>
+                      </div>
+
+                      {/* Presets */}
+                      <div className="grid grid-cols-5 gap-1">
+                        {[10, 25, 50, 75, 100].map((perc) => (
+                          <button 
+                            key={perc} 
+                            onClick={() => handlePresetPercentage(perc)}
+                            className="rounded py-0.5 text-[8px] font-mono font-bold border border-slate-900 bg-slate-950 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                          >
+                            {perc}%
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={() => executeSpotTrade('sell')}
+                      className="w-full rounded bg-rose-500 hover:bg-rose-600 active:scale-95 text-white font-black py-2 text-xs uppercase transition-all text-center select-none cursor-pointer shadow hover:shadow-rose-500/10 mt-2"
+                    >
+                      Sell SHORT
+                    </button>
+                  </div>
+
+                </div>
+
+                {/* Account info section inside box bottom */}
+                <div className="pt-2 border-t border-slate-900 flex justify-between text-[10px] text-slate-400 font-mono items-center shrink-0">
+                  <div className="flex flex-col">
+                    <span>Balance: ${formatBalance(account.balance)}</span>
+                    <span className="text-emerald-450">Available: ${formatBalance(freeBalance)}</span>
+                  </div>
+                  {activeContracts.length > 0 && (
+                    <div className="text-right">
+                      <span className="text-amber-500 font-semibold">{activeContracts.length} Active Deals</span>
+                      <span className="block text-[8px] text-slate-500">Locked: ${formatBalance(activeStakes)}</span>
                     </div>
                   )}
-
-                  <div className="flex items-center rounded-lg border border-slate-900 bg-slate-900/10 px-3 py-2">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none pointer-events-none select-none">ORDER TOTAL</span>
-                    <input 
-                      type="text" 
-                      value={spotAmount} 
-                      onChange={(e) => setSpotAmount(e.target.value)}
-                      className="w-full bg-transparent border-none text-right font-mono text-xs font-extrabold focus:outline-none focus:ring-0" 
-                    />
-                    <span className="text-[10px] text-slate-400 font-mono ml-1.5 uppercase font-black">{activeAsset.symbol}</span>
-                  </div>
-
-                  {/* Percentage indicators presets */}
-                  <div className="grid grid-cols-5 gap-1.5 pt-1">
-                    {[10, 25, 50, 75, 100].map((perc) => (
-                      <button 
-                        key={perc} 
-                        onClick={() => handlePresetPercentage(perc)}
-                        className="rounded py-1 text-[9px] font-mono font-bold border border-slate-900 hover:border-slate-700 bg-slate-900/40 text-slate-400 hover:text-white transition-colors"
-                      >
-                        {perc}%
-                      </button>
-                    ))}
-                  </div>
-
-                  <button 
-                    onClick={() => executeSpotTrade('sell')}
-                    className="w-full rounded-md bg-rose-500 hover:bg-rose-600 text-white font-black py-2.5 text-xs uppercase shadow-sm active:scale-95 transition-all text-center select-none cursor-pointer"
-                  >
-                    Sell SHORT ({activeAsset.symbol})
-                  </button>
                 </div>
 
               </div>
+
             </div>
 
-            {/* Bottom active position lists panel */}
-            <PositionsList 
-              theme={theme}
-              activeContracts={activeContracts}
-              closedContracts={tradeHistory}
-              onSellContract={handleSellContractEarly}
-              activeTab={positionsTab}
-              onChangeTab={handlePositionsTabChange}
-            />
+            {/* Quick Balance Header & Open Positions, Statements, Metrics & Stats terminal spreading to both ends */}
+            <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-950/40 border-slate-900' : 'bg-white border-slate-200'} space-y-4 mt-5`}>
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-3.5 rounded-lg bg-slate-900/15 dark:bg-slate-950/45 border border-slate-150 dark:border-slate-850 gap-4">
+                <div className="flex items-center space-x-3">
+                  <div className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <div>
+                    <span className="text-[9px] text-slate-400 uppercase font-black tracking-wider block font-mono">Live Account Wallet Balance</span>
+                    <span className="text-lg md:text-xl font-mono font-black text-amber-500 leading-none">${formatBalance(account.balance)} <span className="text-[10px] text-slate-400 font-normal">USDT</span></span>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-10 text-left font-mono w-full md:w-auto">
+                  <div className="border-l border-slate-250 dark:border-slate-800/85 pl-2 sm:pl-3.5">
+                    <span className="text-[8px] sm:text-[9px] text-slate-500 uppercase font-bold block leading-none mb-1">Available</span>
+                    <span className="text-xs sm:text-sm font-extrabold text-emerald-500 dark:text-emerald-400 leading-none">${formatBalance(freeBalance)}</span>
+                  </div>
+                  <div className="border-l border-slate-250 dark:border-slate-800/85 pl-2 sm:pl-3.5">
+                    <span className="text-[8px] sm:text-[9px] text-slate-500 uppercase font-bold block leading-none mb-1">Active Deals</span>
+                    <span className="text-xs sm:text-sm font-extrabold text-amber-550 leading-none">{activeContracts.length} Open</span>
+                  </div>
+                  <div className="border-l border-slate-250 dark:border-slate-800/85 pl-2 sm:pl-3.5">
+                    <span className="text-[8px] sm:text-[9px] text-slate-500 uppercase font-bold block leading-none mb-1">Locked</span>
+                    <span className="text-xs sm:text-sm font-extrabold text-slate-450 leading-none">${formatBalance(activeStakes)}</span>
+                  </div>
+                </div>
+              </div>
 
+              <PositionsList 
+                theme={theme}
+                activeContracts={activeContracts}
+                closedContracts={tradeHistory}
+                onSellContract={handleSellContractEarly}
+                activeTab={positionsTab}
+                onChangeTab={handlePositionsTabChange}
+                cashoutMode={(gameSettings as any)?.cashoutMode || 'enabled'}
+              />
+            </div>
           </div>
-
-          {/* ===================================================== */}
+          
           {/* RIGHT COLUMN (Order Book, Markets search list, Wallet Pie, Bot config, News) */}
           {/* ===================================================== */}
           <div className="w-full xl:w-96 shrink-0 flex flex-col space-y-5">
@@ -2271,6 +2506,8 @@ export default function App() {
 
         </div>
 
+      </div>
+
         {/* ========================================================= */}
         {/* 2.4 SECURE DISH NEWS POPUP OVERLAYS */}
         {/* ========================================================= */}
@@ -2363,6 +2600,7 @@ export default function App() {
         onWithdraw={handleWithdrawCashier}
         currentUser={currentUser}
         theme={theme}
+        gameSettings={gameSettings}
       />
 
       <GuideModal 
@@ -2378,6 +2616,14 @@ export default function App() {
         currentUser={currentUser}
         onUpdateUser={setCurrentUser}
         onLogout={() => setCurrentUser(null)}
+      />
+
+      <InviteModal 
+        isOpen={isInviteOpen}
+        onClose={() => setIsInviteOpen(false)}
+        currentUser={currentUser}
+        theme={theme}
+        triggerToast={triggerToast}
       />
 
       <AuthModal 
