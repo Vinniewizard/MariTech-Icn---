@@ -76,14 +76,14 @@ export default function WizardBot({
   onTriggerAuth,
   triggerToast
 }: CopilotProps) {
-  // Navigation tabs:
-  const [botTab, setBotTab] = useState<'signals' | 'telegram' | 'onboard' | 'qa' | 'ads' | 'notifs' | 'group'>('signals');
-  // Telegram Sub tabs:
-  const [tgSubTab, setTgSubTab] = useState<'simulator' | 'api_settings' | 'members'>('simulator');
-  
   const isAdmin = currentUser?.email?.toLowerCase().includes('admin') || 
                   currentUser?.email?.toLowerCase().includes('peterchristine') || 
                   currentUser?.email?.toLowerCase().includes('lucasantiago');
+
+  // Navigation tabs:
+  const [botTab, setBotTab] = useState<'signals' | 'telegram' | 'onboard' | 'qa' | 'ads' | 'notifs' | 'group'>(isAdmin ? 'signals' : 'qa');
+  // Telegram Sub tabs:
+  const [tgSubTab, setTgSubTab] = useState<'simulator' | 'api_settings' | 'members'>('simulator');
 
 
   const [messages, setMessages] = useState<CopilotMessage[]>([
@@ -611,16 +611,18 @@ export default function WizardBot({
 
       {/* TOP NAVIGATION TABS */}
       <div className="flex overflow-x-auto whitespace-nowrap border-b border-gray-150 dark:border-zinc-850 bg-slate-50 dark:bg-zinc-900 text-xs font-bold uppercase tracking-wider select-none scrollbar-hide">
-        <button 
-          onClick={() => setBotTab('signals')}
-          className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all shrink-0 ${
-            botTab === 'signals' 
-              ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
-              : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-          }`}
-        >
-          🔮 Signals
-        </button>
+        {isAdmin && (
+          <button 
+            onClick={() => setBotTab('signals')}
+            className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all shrink-0 ${
+              botTab === 'signals' 
+                ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-zinc-950' 
+                : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+            }`}
+          >
+            🔮 Signals
+          </button>
+        )}
         {isAdmin && (
           <button 
             onClick={() => setBotTab('telegram')}
@@ -660,7 +662,7 @@ export default function WizardBot({
             <span>Notifications</span>
           </button>
         )}
-        {!isAdmin && (
+        {isAdmin && (
           <button 
             onClick={() => setBotTab('onboard')}
             className={`flex-1 py-2.5 px-3 text-center border-b-2 transition-all shrink-0 ${
@@ -699,7 +701,7 @@ export default function WizardBot({
       {/* MAIN TAB PANELS */}
       <div className="flex-1 overflow-y-auto max-h-[460px] scrollbar-thin flex flex-col min-h-[380px]">
         {/* ============ TAB: SIGNALS & CHAT ============ */}
-        {botTab === 'signals' && (
+        {botTab === 'signals' && isAdmin && (
           <div className="flex flex-col flex-1 pb-4">
             {/* Signal overlay widget */}
             <div className={`p-4 border-b ${
@@ -1320,7 +1322,7 @@ export default function WizardBot({
         )}
 
         {/* ============ TAB: DIRECT ONBOARDING ============ */}
-        {botTab === 'onboard' && (
+        {botTab === 'onboard' && isAdmin && (
           <div className="p-4 space-y-4 text-xs select-none">
             {/* Guide for Telegram members coming to register */}
             <div className="border border-slate-200 dark:border-zinc-800 rounded-lg p-3 bg-slate-50 dark:bg-zinc-900/60 space-y-3">
