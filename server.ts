@@ -1394,6 +1394,15 @@ Active technical indicator values: ${indicatorsString}.`}`;
       
       // Handle auto bot invites
       if (tMsg.new_chat_members) {
+        // DELETE THE NOTIFICATION FROM THE GROUP SO NO ONE SEES IT
+        if (telegramConfig.botToken && chatId) {
+           fetch(`https://api.telegram.org/bot${telegramConfig.botToken}/deleteMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ chat_id: chatId, message_id: tMsg.message_id })
+           }).catch(() => {});
+        }
+
         for (const member of tMsg.new_chat_members) {
           const userHandle = member.username ? `@${member.username}` : (member.first_name || 'Member');
           telegramLogs.push({
