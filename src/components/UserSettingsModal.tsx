@@ -5,16 +5,17 @@ interface UserSettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   theme: 'dark' | 'light';
+  triggerToast: (text: string, success: boolean) => void;
 }
 
-export default function UserSettingsModal({ isOpen, onClose, theme }: UserSettingsModalProps) {
+export default function UserSettingsModal({ isOpen, onClose, theme, triggerToast }: UserSettingsModalProps) {
   const [activeMenu, setActiveMenu] = useState<'profile' | 'security' | 'notifications' | 'vip' | 'affiliate'>('profile');
 
   if (!isOpen) return null;
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    alert('Copied to clipboard!');
+    triggerToast('Copied to clipboard!', true);
   };
 
   return (

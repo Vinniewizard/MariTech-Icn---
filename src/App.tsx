@@ -2606,6 +2606,7 @@ export default function App() {
       <GuideModal 
         isOpen={isGuideOpen}
         onClose={() => setIsGuideOpen(false)}
+        triggerToast={triggerToast}
       />
 
       <SettingsModal 
@@ -2638,6 +2639,7 @@ export default function App() {
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
         theme={theme}
+        triggerToast={triggerToast}
       />
 
     </div>

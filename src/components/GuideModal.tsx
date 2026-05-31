@@ -5,9 +5,10 @@ import { CONTRACT_TUTORIALS } from '../data';
 interface GuideModalProps {
   isOpen: boolean;
   onClose: () => void;
+  triggerToast: (text: string, success: boolean) => void;
 }
 
-export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
+export default function GuideModal({ isOpen, onClose, triggerToast }: GuideModalProps) {
   const [activeTab, setActiveTab] = useState<string>('trading-essentials');
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({ email: '', phone: '' });
@@ -26,7 +27,7 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
     setTimeout(() => {
       setFormSubmitted(false);
       setFormData({ email: '', phone: '' });
-      alert("Application Received! The LWEX Education team will contact you shortly.");
+      triggerToast("Application Received! The LWEX Education team will contact you shortly.", true);
     }, 2500);
   };
 

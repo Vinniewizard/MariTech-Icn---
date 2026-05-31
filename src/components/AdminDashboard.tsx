@@ -6,6 +6,7 @@ interface AdminDashboardProps {
   isOpen: boolean;
   onClose: () => void;
   theme: 'dark' | 'light';
+  triggerToast: (text: string, success: boolean) => void;
 }
 
 interface User {
@@ -72,7 +73,7 @@ interface GameSettings {
   cashoutMode?: 'enabled' | 'disabled' | 'smart';
 }
 
-export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboardProps) {
+export default function AdminDashboard({ isOpen, onClose, theme, triggerToast }: AdminDashboardProps) {
   const [users, setUsers] = useState<User[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
   const [adminKey, setAdminKey] = useState('');
@@ -237,11 +238,11 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
 
         setIsAuthenticated(true);
       } else {
-        alert('Invalid admin key');
+        triggerToast('Invalid admin key', false);
       }
     } catch (error) {
       console.error('Error fetching admin data:', error);
-      alert('Failed to fetch data');
+      triggerToast('Failed to fetch data', false);
     } finally {
       setLoading(false);
     }
@@ -271,16 +272,16 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
         })
       });
       if (res.ok) {
-        alert('User details updated successfully');
+        triggerToast('User details updated successfully', true);
         setEditingUser(null);
         fetchData(adminKey);
       } else {
         const data = await res.json();
-        alert('Failed to update: ' + data.message);
+        triggerToast('Failed to update: ' + data.message, false);
       }
     } catch (error) {
       console.error('Error updating user:', error);
-      alert('Failed to update user');
+      triggerToast('Failed to update user', false);
     }
   };
 
@@ -302,7 +303,7 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
         // Refresh users and stats
         fetchData(adminKey);
       } else {
-        alert('Failed to process deposit');
+        triggerToast('Failed to process deposit', false);
       }
     } catch (error) {
       console.error('Error processing deposit:', error);
@@ -323,9 +324,9 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
       });
 
       if (res.ok) {
-        alert('Game settings updated successfully');
+        triggerToast('Game settings updated successfully', true);
       } else {
-        alert('Failed to update game settings');
+        triggerToast('Failed to update game settings', false);
       }
     } catch (error) {
       console.error('Error updating game settings:', error);
@@ -342,7 +343,7 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
         finalKey = 'admin-secret-key';
         setAdminKey('admin-secret-key');
       } else {
-        alert('Invalid GADMIN Credentials. Access denied.');
+        triggerToast('Invalid GADMIN Credentials. Access denied.', false);
         return;
       }
     }
@@ -364,7 +365,7 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
         setTelegramConfig(data.config);
         setTgLogs(data.logs || []);
       } else {
-        alert('Failed to pin notification message.');
+        triggerToast('Failed to pin notification message.', false);
       }
     } catch (e) {
       console.error('Pin error:', e);
@@ -384,7 +385,7 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
         setTelegramConfig(data.config);
         setTgLogs(data.logs || []);
       } else {
-        alert('Failed to unpin notification message.');
+        triggerToast('Failed to unpin notification message.', false);
       }
     } catch (e) {
       console.error('Unpin error:', e);
@@ -417,13 +418,13 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
         const data = await res.json();
         setTgLogs(data.logs || []);
         setCustomBroadcast('');
-        alert(data.realSent ? 'Dispatched real message to Telegram client!' : 'Added notice to Group broadcast queue.');
+        triggerToast(data.realSent ? 'Dispatched real message to Telegram client!' : 'Added notice to Group broadcast queue.', true);
       } else {
-        alert('Failed to send broadcast');
+        triggerToast('Failed to send broadcast', false);
       }
     } catch (err) {
       console.error(err);
-      alert('Error broadcasting message');
+      triggerToast('Error broadcasting message', false);
     } finally {
       setIsBroadcasting(false);
     }
@@ -453,13 +454,13 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
         const data = await res.json();
         setTelegramConfig(data.config);
         setTgLogs(data.logs || []);
-        alert('Telegram configuration updated successfully.');
+        triggerToast('Telegram configuration updated successfully.', true);
       } else {
-        alert('Failed to update Telegram configuration.');
+        triggerToast('Failed to update Telegram configuration.', false);
       }
     } catch (e) {
       console.error(e);
-      alert('Error updating configuration');
+      triggerToast('Error updating configuration', false);
     } finally {
       setIsSavingTgConfig(false);
     }
@@ -1209,7 +1210,7 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
                                   headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
                                   body: JSON.stringify({ enabled: true })
                                 });
-                                alert('Chat Enabled!');
+                                triggerToast('Chat Enabled!', true);
                               } catch(e) {}
                             }}
                             className="flex-1 bg-green-600/20 hover:bg-green-600/40 text-green-500 border border-green-600/50 font-bold py-2 rounded-lg text-xs uppercase"
@@ -1225,7 +1226,7 @@ export default function AdminDashboard({ isOpen, onClose, theme }: AdminDashboar
                                   headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
                                   body: JSON.stringify({ enabled: false })
                                 });
-                                alert('Chat Disabled!');
+                                triggerToast('Chat Disabled!', true);
                               } catch(e) {}
                             }}
                             className="flex-1 bg-red-600/20 hover:bg-red-600/40 text-red-500 border border-red-600/50 font-bold py-2 rounded-lg text-xs uppercase"

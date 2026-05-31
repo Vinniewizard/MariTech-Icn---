@@ -7,6 +7,7 @@ interface TradeControlsProps {
   assets: Asset[];
   selectedAsset: Asset;
   onSelectAsset: (asset: Asset) => void;
+  triggerToast: (text: string, success: boolean) => void;
   onPurchase: (config: {
     type: ContractType;
     direction: 'rise' | 'fall' | 'higher' | 'lower' | 'touch' | 'no-touch' | 'over' | 'under';
@@ -24,6 +25,7 @@ export default function TradeControls({
   assets,
   selectedAsset,
   onSelectAsset,
+  triggerToast,
   onPurchase,
   balance
 }: TradeControlsProps) {
@@ -90,14 +92,14 @@ export default function TradeControls({
 
   const initiatePurchase = (dir: 'rise' | 'fall' | 'higher' | 'lower' | 'touch' | 'no-touch' | 'over' | 'under') => {
     if (stake <= 0 || stake > balance) {
-      alert("Insufficient account funds or invalid stake size.");
+      triggerToast("Insufficient account funds or invalid stake size.", false);
       return;
     }
     
     // Validate target digit if contract type is digit-over-under
     if (contractType === 'digit-over-under') {
       if (typeof targetDigit !== 'number' || targetDigit < 0 || targetDigit > 9 || isNaN(targetDigit)) {
-        alert("Invalid target digit size. Correct range is 0 to 9.");
+        triggerToast("Invalid target digit size. Correct range is 0 to 9.", false);
         return;
       }
     }
